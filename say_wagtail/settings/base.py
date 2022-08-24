@@ -24,6 +24,8 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
+    "django_grpc",
+
     "super_page",
     "user_manager",
 
@@ -173,3 +175,23 @@ WAGTAILSEARCH_BACKENDS = {
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 WAGTAILADMIN_BASE_URL = "http://example.com"
+
+
+# django-grpc configs
+GRPCSERVER = {
+    'servicers': [
+        'say_wagtail.grpc.server.grpc_hook'
+    ],  # see `grpc_hook()` below
+    'interceptors': [
+        # 'dotted.path.to.interceptor_class',
+    ],  # optional, interceprots are similar to middleware in Django
+    'maximum_concurrent_rpcs': None,
+    'options': [("grpc.max_receive_message_length", 1024 * 1024 * 100)],  # optional, list of key-value pairs to configure the channel. The full list of available channel arguments: https://grpc.github.io/grpc/core/group__grpc__arg__keys.html
+    # 'credentials': [
+    #     {
+    #     'private_key': 'private_key.pem',
+    #     'certificate_chain': 'certificate_chain.pem'
+    #     }
+    # ],    # required only if SSL/TLS support is required to be enabled
+    'async': True  # Default: False, if True then gRPC server will start in ASYNC mode
+}
