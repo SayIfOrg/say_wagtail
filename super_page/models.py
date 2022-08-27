@@ -5,7 +5,7 @@ from wagtail.core.models import Page
 from wagtail.fields import StreamField
 from wagtail.images.blocks import ImageChooserBlock
 
-StreamValue
+
 class SimplePage(Page):
     body = StreamField(
         [
