@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rwebpage.proto\x12\x07webpage\"l\n\tSuperPage\x12\n\n\x02id\x18\x01 \x01(\x03\x12\x0c\n\x04\x62ody\x18\x02 \x01(\t\x12\x16\n\x0e\x65\x64it_originals\x18\x03 \x01(\x08\x12\x1a\n\x12reference_original\x18\x04 \x01(\x08\x12\x11\n\tjust_edit\x18\x05 \x01(\x08\"\x19\n\x06Result\x12\x0f\n\x07message\x18\x01 \x01(\t2A\n\x04Page\x12\x39\n\x10PublishSuperPage\x12\x12.webpage.SuperPage\x1a\x0f.webpage.Result\"\x00\x42\x36\n\x1bio.grpc.examples.helloworldB\x0fHelloWorldProtoP\x01\xa2\x02\x03HLWb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rwebpage.proto\x12\x07webpage\"}\n\tSuperPage\x12\x0f\n\x07\x63hat_id\x18\x01 \x01(\x03\x12\n\n\x02id\x18\x02 \x01(\x03\x12\x0c\n\x04\x62ody\x18\x03 \x01(\t\x12\x16\n\x0e\x65\x64it_originals\x18\x04 \x01(\x08\x12\x1a\n\x12reference_original\x18\x05 \x01(\x08\x12\x11\n\tjust_edit\x18\x06 \x01(\x08\"\x19\n\x06Result\x12\x0f\n\x07message\x18\x01 \x01(\t2A\n\x04Page\x12\x39\n\x10PublishSuperPage\x12\x12.webpage.SuperPage\x1a\x0f.webpage.Result\"\x00\x42\x36\n\x1bio.grpc.examples.helloworldB\x0fHelloWorldProtoP\x01\xa2\x02\x03HLWb\x06proto3')
 
 
 
@@ -40,9 +40,9 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   DESCRIPTOR._serialized_options = b'\n\033io.grpc.examples.helloworldB\017HelloWorldProtoP\001\242\002\003HLW'
   _SUPERPAGE._serialized_start=26
-  _SUPERPAGE._serialized_end=134
-  _RESULT._serialized_start=136
-  _RESULT._serialized_end=161
-  _PAGE._serialized_start=163
-  _PAGE._serialized_end=228
+  _SUPERPAGE._serialized_end=151
+  _RESULT._serialized_start=153
+  _RESULT._serialized_end=178
+  _PAGE._serialized_start=180
+  _PAGE._serialized_end=245
 # @@protoc_insertion_point(module_scope)

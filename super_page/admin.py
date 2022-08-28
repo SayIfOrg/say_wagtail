@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import TelegramInstance
+
+
+@admin.register(TelegramInstance)
+class TelegramInstanceWAdmin(admin.ModelAdmin):
+    pass
