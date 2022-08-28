@@ -13,7 +13,7 @@ from .models import SimplePage
 @receiver(page_published, sender=SimplePage)
 def send_grpc_on_save(instance, **kwargs):
     with grpc.insecure_channel("localhost:5060") as channel:
-        stub = webpage_pb2_grpc.PublishStub(channel)
+        stub = webpage_pb2_grpc.PageStub(channel)
         # response = stub.SayHello(helloworld_pb2.HelloRequest(name="you"))
         val = ""
         for content in instance.body:
@@ -21,5 +21,17 @@ def send_grpc_on_save(instance, **kwargs):
                 val += str(richtext(content.value)) + "\n"
             else:
                 val += content.value + "\n"
-        response = stub.PublishRichText(webpage_pb2.SuperPage(id=instance.id, body=val))
+        if instance.first_published_at == instance.latest_revision_created_at:
+            response = stub.PublishSuperPage(
+                webpage_pb2.SuperPage(id=instance.id, body=val)
+            )
+        else:
+            response = stub.PublishSuperPage(
+                webpage_pb2.SuperPage(
+                    id=instance.id,
+                    body=val,
+                    edit_originals=True,
+                    reference_original=True,
+                )
+            )
         print("Greeter client received: " + response.message)
