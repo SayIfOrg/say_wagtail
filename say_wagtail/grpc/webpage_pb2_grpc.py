@@ -64,3 +64,130 @@ class Page(object):
             webpage__pb2.Result.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+
+class ManageInstanceStub(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def __init__(self, channel):
+        """Constructor.
+
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.ValidateToken = channel.unary_unary(
+                '/webpage.ManageInstance/ValidateToken',
+                request_serializer=webpage__pb2.Token.SerializeToString,
+                response_deserializer=webpage__pb2.Project.FromString,
+                )
+        self.InstanceList = channel.unary_unary(
+                '/webpage.ManageInstance/InstanceList',
+                request_serializer=webpage__pb2.Project.SerializeToString,
+                response_deserializer=webpage__pb2.Instances.FromString,
+                )
+        self.InstanceDetail = channel.unary_unary(
+                '/webpage.ManageInstance/InstanceDetail',
+                request_serializer=webpage__pb2.Instance.SerializeToString,
+                response_deserializer=webpage__pb2.Instance.FromString,
+                )
+
+
+class ManageInstanceServicer(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def ValidateToken(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def InstanceList(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def InstanceDetail(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+
+def add_ManageInstanceServicer_to_server(servicer, server):
+    rpc_method_handlers = {
+            'ValidateToken': grpc.unary_unary_rpc_method_handler(
+                    servicer.ValidateToken,
+                    request_deserializer=webpage__pb2.Token.FromString,
+                    response_serializer=webpage__pb2.Project.SerializeToString,
+            ),
+            'InstanceList': grpc.unary_unary_rpc_method_handler(
+                    servicer.InstanceList,
+                    request_deserializer=webpage__pb2.Project.FromString,
+                    response_serializer=webpage__pb2.Instances.SerializeToString,
+            ),
+            'InstanceDetail': grpc.unary_unary_rpc_method_handler(
+                    servicer.InstanceDetail,
+                    request_deserializer=webpage__pb2.Instance.FromString,
+                    response_serializer=webpage__pb2.Instance.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'webpage.ManageInstance', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+
+
+ # This class is part of an EXPERIMENTAL API.
+class ManageInstance(object):
+    """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def ValidateToken(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/webpage.ManageInstance/ValidateToken',
+            webpage__pb2.Token.SerializeToString,
+            webpage__pb2.Project.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def InstanceList(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/webpage.ManageInstance/InstanceList',
+            webpage__pb2.Project.SerializeToString,
+            webpage__pb2.Instances.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def InstanceDetail(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/webpage.ManageInstance/InstanceDetail',
+            webpage__pb2.Instance.SerializeToString,
+            webpage__pb2.Instance.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

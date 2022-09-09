@@ -14,12 +14,44 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rwebpage.proto\x12\x07webpage\"}\n\tSuperPage\x12\x0f\n\x07\x63hat_id\x18\x01 \x01(\x03\x12\n\n\x02id\x18\x02 \x01(\x03\x12\x0c\n\x04\x62ody\x18\x03 \x01(\t\x12\x16\n\x0e\x65\x64it_originals\x18\x04 \x01(\x08\x12\x1a\n\x12reference_original\x18\x05 \x01(\x08\x12\x11\n\tjust_edit\x18\x06 \x01(\x08\"\x19\n\x06Result\x12\x0f\n\x07message\x18\x01 \x01(\t2A\n\x04Page\x12\x39\n\x10PublishSuperPage\x12\x12.webpage.SuperPage\x1a\x0f.webpage.Result\"\x00\x42\x36\n\x1bio.grpc.examples.helloworldB\x0fHelloWorldProtoP\x01\xa2\x02\x03HLWb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rwebpage.proto\x12\x07webpage\"1\n\tInstances\x12$\n\tinstances\x18\x01 \x03(\x0b\x32\x11.webpage.Instance\"3\n\x08Instance\x12\n\n\x02id\x18\x01 \x01(\x03\x12\r\n\x05title\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\"&\n\x05Token\x12\r\n\x05token\x18\x01 \x01(\t\x12\x0e\n\x06\x63ommit\x18\x02 \x01(\x08\"#\n\x07Project\x12\n\n\x02id\x18\x01 \x01(\x03\x12\x0c\n\x04name\x18\x02 \x01(\t\"}\n\tSuperPage\x12\x0f\n\x07\x63hat_id\x18\x01 \x01(\x03\x12\n\n\x02id\x18\x02 \x01(\x03\x12\x0c\n\x04\x62ody\x18\x03 \x01(\t\x12\x16\n\x0e\x65\x64it_originals\x18\x04 \x01(\x08\x12\x1a\n\x12reference_original\x18\x05 \x01(\x08\x12\x11\n\tjust_edit\x18\x06 \x01(\x08\"\x19\n\x06Result\x12\x0f\n\x07message\x18\x01 \x01(\t2A\n\x04Page\x12\x39\n\x10PublishSuperPage\x12\x12.webpage.SuperPage\x1a\x0f.webpage.Result\"\x00\x32\xb7\x01\n\x0eManageInstance\x12\x33\n\rValidateToken\x12\x0e.webpage.Token\x1a\x10.webpage.Project\"\x00\x12\x36\n\x0cInstanceList\x12\x10.webpage.Project\x1a\x12.webpage.Instances\"\x00\x12\x38\n\x0eInstanceDetail\x12\x11.webpage.Instance\x1a\x11.webpage.Instance\"\x00\x42\x36\n\x1bio.grpc.examples.helloworldB\x0fHelloWorldProtoP\x01\xa2\x02\x03HLWb\x06proto3')
 
 
 
+_INSTANCES = DESCRIPTOR.message_types_by_name['Instances']
+_INSTANCE = DESCRIPTOR.message_types_by_name['Instance']
+_TOKEN = DESCRIPTOR.message_types_by_name['Token']
+_PROJECT = DESCRIPTOR.message_types_by_name['Project']
 _SUPERPAGE = DESCRIPTOR.message_types_by_name['SuperPage']
 _RESULT = DESCRIPTOR.message_types_by_name['Result']
+Instances = _reflection.GeneratedProtocolMessageType('Instances', (_message.Message,), {
+  'DESCRIPTOR' : _INSTANCES,
+  '__module__' : 'webpage_pb2'
+  # @@protoc_insertion_point(class_scope:webpage.Instances)
+  })
+_sym_db.RegisterMessage(Instances)
+
+Instance = _reflection.GeneratedProtocolMessageType('Instance', (_message.Message,), {
+  'DESCRIPTOR' : _INSTANCE,
+  '__module__' : 'webpage_pb2'
+  # @@protoc_insertion_point(class_scope:webpage.Instance)
+  })
+_sym_db.RegisterMessage(Instance)
+
+Token = _reflection.GeneratedProtocolMessageType('Token', (_message.Message,), {
+  'DESCRIPTOR' : _TOKEN,
+  '__module__' : 'webpage_pb2'
+  # @@protoc_insertion_point(class_scope:webpage.Token)
+  })
+_sym_db.RegisterMessage(Token)
+
+Project = _reflection.GeneratedProtocolMessageType('Project', (_message.Message,), {
+  'DESCRIPTOR' : _PROJECT,
+  '__module__' : 'webpage_pb2'
+  # @@protoc_insertion_point(class_scope:webpage.Project)
+  })
+_sym_db.RegisterMessage(Project)
+
 SuperPage = _reflection.GeneratedProtocolMessageType('SuperPage', (_message.Message,), {
   'DESCRIPTOR' : _SUPERPAGE,
   '__module__' : 'webpage_pb2'
@@ -35,14 +67,25 @@ Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,),
 _sym_db.RegisterMessage(Result)
 
 _PAGE = DESCRIPTOR.services_by_name['Page']
+_MANAGEINSTANCE = DESCRIPTOR.services_by_name['ManageInstance']
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   DESCRIPTOR._serialized_options = b'\n\033io.grpc.examples.helloworldB\017HelloWorldProtoP\001\242\002\003HLW'
-  _SUPERPAGE._serialized_start=26
-  _SUPERPAGE._serialized_end=151
-  _RESULT._serialized_start=153
-  _RESULT._serialized_end=178
-  _PAGE._serialized_start=180
-  _PAGE._serialized_end=245
+  _INSTANCES._serialized_start=26
+  _INSTANCES._serialized_end=75
+  _INSTANCE._serialized_start=77
+  _INSTANCE._serialized_end=128
+  _TOKEN._serialized_start=130
+  _TOKEN._serialized_end=168
+  _PROJECT._serialized_start=170
+  _PROJECT._serialized_end=205
+  _SUPERPAGE._serialized_start=207
+  _SUPERPAGE._serialized_end=332
+  _RESULT._serialized_start=334
+  _RESULT._serialized_end=359
+  _PAGE._serialized_start=361
+  _PAGE._serialized_end=426
+  _MANAGEINSTANCE._serialized_start=429
+  _MANAGEINSTANCE._serialized_end=612
 # @@protoc_insertion_point(module_scope)

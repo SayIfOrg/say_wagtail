@@ -1,0 +1,30 @@
+{% extends "wagtailadmin/base.html" %}
+{% block titletag %}{{ current_year }} calendar{% endblock %}
+{% load static %}
+{% block extra_css %}
+    {{ block.super }}
+        <link href="{% static 'css/vendor/bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-r/ch1jFQoZ4tBPslACmJp1Eg8gcxMvB/tNxzim+iLJ1xkkqcsXkbofVbJ2S+JY4z" crossorigin="">
+
+{% endblock %}
+
+{% block content %}
+    {% include "wagtailadmin/shared/header.html" with title="Calendar" icon="date" %}
+
+<div class="container">
+   <div class="card col-md-3">
+  <div class="card-header">
+    Featured
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">An item</li>
+    <li class="list-group-item">A second item</li>
+    <li class="list-group-item">A third item</li>
+  </ul>
+</div></div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/vendor/bootstrap.bundle.min.js' %}" integrity="sha384-K8jc4Ph++Jqe3Qb8nXYKZuMhQ2kwoyj9FYoAD7h9Qlqyw7mRlyE9xNkL+Xp5GnUL" crossorigin="anonymous"></script>
+    <script src="{% static 'js/vendor/popper.min.js' %}" integrity="sha384-HKz0G3oxpwrtUfX5KZOBiY9Tj9fZO5bC7Wo5U2S8dc9ALBNTPYiNnfBBQVsf7fgQ" crossorigin="anonymous"></script>
+
+{% endblock %}

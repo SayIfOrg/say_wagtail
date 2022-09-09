@@ -26,6 +26,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 INSTALLED_APPS = [
     "django_grpc",
 
+    "linked_account",
     "super_page",
     "user_manager",
 
@@ -97,6 +98,14 @@ DATABASES = {
         "PASSWORD": "password",
         "HOST": "localhost",
         "PORT": "5432",
+    }
+}
+
+# The cache backends to use.
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": os.path.join(BASE_DIR, "cache")
     }
 }
 
@@ -193,5 +202,5 @@ GRPCSERVER = {
     #     'certificate_chain': 'certificate_chain.pem'
     #     }
     # ],    # required only if SSL/TLS support is required to be enabled
-    'async': True  # Default: False, if True then gRPC server will start in ASYNC mode
+    'async': False  # Default: False, if True then gRPC server will start in ASYNC mode
 }
