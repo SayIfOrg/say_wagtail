@@ -1,3 +1,4 @@
+import grpc
 from django import forms
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -9,6 +10,7 @@ from wagtail.models import Orderable
 from wagtail.snippets.models import register_snippet
 
 from linked_account.views import telegram_instance_chooser_viewset
+from say_wagtail.grpc import webpage_pb2_grpc, webpage_pb2
 
 
 class TelegramActionForm(WagtailAdminModelForm):
@@ -91,3 +93,19 @@ class TelegramPublishMode(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class TelegramInstance:
+    @staticmethod
+    def all() -> webpage_pb2.Instances:
+        with grpc.insecure_channel("localhost:5060") as channel:
+            stub = webpage_pb2_grpc.ManageInstanceStub(channel)
+            r = stub.InstanceList(webpage_pb2.Project(id=1, name=""))
+            return r.instances
+
+    @staticmethod
+    def get(pk: int) -> webpage_pb2.Instance:
+        with grpc.insecure_channel("localhost:5060") as channel:
+            stub = webpage_pb2_grpc.ManageInstanceStub(channel)
+            r = stub.InstanceDetail(webpage_pb2.Instance(id=pk))
+            return r

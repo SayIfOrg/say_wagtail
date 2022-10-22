@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from wagtail import hooks
 from wagtail.admin.menu import MenuItem, SubmenuMenuItem, Menu
 
-from .views import telegram_linked_account, telegram_instance_chooser_viewset
+from .views import TelegramLinkedAccountView, telegram_instance_chooser_viewset
 
 
 @hooks.register("register_admin_urls")
@@ -11,7 +11,7 @@ def register_calendar_url():
     return [
         path(
             "telegram-linked-account/",
-            telegram_linked_account,
+            TelegramLinkedAccountView.as_view(),
             name="telegram_linked_account",
         ),
     ]

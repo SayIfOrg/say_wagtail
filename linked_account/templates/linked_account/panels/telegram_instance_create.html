@@ -1,0 +1,57 @@
+<div class="container mb-4">
+  <div id="new-instance" class="d-grid col-8">
+    <button class="btn btn-secondary" type="button">Link a new instance</button>
+  </div>
+  <div id="code-container" class="d-none card col-8">
+    <div class="card-body">
+      code goes here
+    </div>
+  </div>
+</div>
+
+<script>
+  $("#new-instance").on("click", (e) => {
+    $(e.target).addClass("d-none");
+    $.ajax({
+      url: "{{ url }}",
+      method: "{{ callback_method }}",
+      data: {new: true},
+      statusCode: {
+        200: tokenCallback,
+      },
+      error: () => alert("error")
+    })
+  })
+
+  function showCode(code) {
+    $("#code-container").removeClass("d-none");
+    $("#code-container").children("div").text(code);
+  }
+  function showCodeReverse() {
+    $("#code-container").addClass("d-none");
+    $("#code-container").children("div").text("");
+  }
+  function checking(code) {
+    $.ajax({
+      url: "{{ url }}",
+      method: "{{ callback_method }}",
+      data: {code: code},
+      statusCode: {
+        201: () => {
+          alert("OK");
+          clearInterval(intervalId);
+          },
+        204: () => {},
+        404: (data) => {
+          alert(data.status);
+          clearInterval(intervalId);
+          showCodeReverse();
+          },
+      },
+    })
+  }
+  function tokenCallback({code}) {
+    showCode(code);
+    intervalId = setInterval(checking, timeout=10000, code);
+  }
+</script>

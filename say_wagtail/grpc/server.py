@@ -11,10 +11,9 @@ def grpc_hook(server):
 
 class ManageInstanceServicer(webpage_pb2_grpc.ManageInstanceServicer):
     def ValidateToken(self, request, context):
-        token = cache.get(request.token)
-        if token:
-            # Priject.object.get
+        project_id = cache.get(request.token)
+        if project_id:
             if request.commit:
-                cache.set(token, "commit")
-            return webpage_pb2.Project(name="ok")
-        return webpage_pb2.Project(name="")
+                cache.set(request.token, "commit")
+            return webpage_pb2.Project(name="ok", id=project_id)
+        return webpage_pb2.Project()
