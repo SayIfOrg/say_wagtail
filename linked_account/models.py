@@ -98,14 +98,14 @@ class TelegramPublishMode(models.Model):
 class TelegramInstance:
     @staticmethod
     def all() -> webpage_pb2.Instances:
-        with grpc.insecure_channel("localhost:5060") as channel:
+        with grpc.insecure_channel("say-telegram-grpc:5060") as channel:
             stub = webpage_pb2_grpc.ManageInstanceStub(channel)
             r = stub.InstanceList(webpage_pb2.Project(id=1, name=""))
             return r.instances
 
     @staticmethod
     def get(pk: int) -> webpage_pb2.Instance:
-        with grpc.insecure_channel("localhost:5060") as channel:
+        with grpc.insecure_channel("say-telegram-grpc:5060") as channel:
             stub = webpage_pb2_grpc.ManageInstanceStub(channel)
             r = stub.InstanceDetail(webpage_pb2.Instance(id=pk))
             return r

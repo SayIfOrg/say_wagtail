@@ -96,7 +96,7 @@ DATABASES = {
         "NAME": "say_wagtail",
         "USER": "postgres",
         "PASSWORD": "password",
-        "HOST": "localhost",
+        "HOST": "blog-db",
         "PORT": "5432",
     }
 }

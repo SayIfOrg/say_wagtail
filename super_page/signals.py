@@ -12,7 +12,7 @@ from .models import SimplePage
 
 @receiver(page_published, sender=SimplePage)
 def send_grpc_on_save(instance, **kwargs):
-    with grpc.insecure_channel("localhost:5060") as channel:
+    with grpc.insecure_channel("say-telegram-grpc:5060") as channel:
         stub = webpage_pb2_grpc.PageStub(channel)
         val = ""
         for content in instance.body:
