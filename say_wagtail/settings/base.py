@@ -165,6 +165,24 @@ STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesSto
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = "/static/"
 
+
+DEFAULT_FILE_STORAGE = 'customized.storages.backends.apache_libcloud.LibCloudStorage'
+LIBCLOUD_PROVIDERS = {
+    "minio-1": {
+        "type": "libcloud.storage.types.Provider.MINIO",
+        "user": "RUf0ZRYlZy7T5qNM",
+        "key": "g9g6BNic7R9xZJBlPGgbqTSwpOmYYOBm",
+        "bucket": "test",
+        "extra": {
+            "host": "127.0.0.1",
+            "port": 9000,
+            "secure": False,
+            "auto_create_container": True
+        },
+    }
+}
+DEFAULT_LIBCLOUD_PROVIDER = "minio-1"
+
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 

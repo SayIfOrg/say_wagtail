@@ -1,7 +1,10 @@
 Django>=4.1,<4.2
 wagtail>=4.0,<4.1
+apache-libcloud>=3.6,<3.7
 black>=22.10,<22.11
 django-grpc>=1.0,<1.1
+django-storages>=1.13,<1.14
 grpcio>=1.50,<1.51
 grpcio-tools>=1.50,<1.51
+minio>=7.1,<7.2
 psycopg2-binary>=2.9,<2.10
