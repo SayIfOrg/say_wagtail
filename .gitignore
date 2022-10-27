@@ -15,7 +15,8 @@ db.sqlite3
 db.sqlite3-journal
 static/
 media/
-cache/ #for file cache backend
+#for file cache backend
+cache/
 # Environments
 .env
 .venv
