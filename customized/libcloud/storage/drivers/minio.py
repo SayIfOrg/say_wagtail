@@ -1,3 +1,5 @@
+from datetime import timedelta
+import io
 import os
 
 from libcloud.storage.drivers.minio import MinIOStorageDriver as OrMinIOStorageDriver
@@ -5,15 +7,49 @@ from libcloud.storage.types import ContainerDoesNotExistError
 from minio.api import Minio
 
 
-from datetime import datetime, timedelta
-
-
 Minio_CDN_URL_EXPIRY_HOURS = float(
     os.getenv("LIBCLOUD_Minio_CDN_URL_EXPIRY_HOURS", "24")
 )
 
 
+def get_content_type(name: str):
+    # TODO complete it and place it somewhere proper
+    if name.endswith(".js"):
+        return "application/javascript"
+    if name.endswith(".css"):
+        return "text/css"
+
+
 class MinIOStorageDriver(OrMinIOStorageDriver):
+    supports_s3_multipart_upload = False
+
+    def upload_object_via_stream(
+        self,
+        iterator,
+        container,
+        object_name,
+        extra=None,
+        headers=None,
+        ex_storage_class=None,
+    ):
+        extra = extra or {}
+        headers = headers or {}
+        headers = {**extra, **headers}
+        content_type = headers.get("content_type", get_con_type(object_name))
+        meta_data = headers.get("meta_data", None)
+
+        object_name = object_name.replace("\\", "/")
+
+        the_bytes = bytes()
+        for i in iterator:
+            the_bytes += i
+
+        length = len(the_bytes)
+        data = io.BytesIO(the_bytes)
+        return self.client.put_object(
+            container.name, object_name, data, length, content_type, meta_data
+        )
+
     def __init__(self, *args, auto_create_container=False, **kwargs):
         super(MinIOStorageDriver, self).__init__(*args, **kwargs)
         self.auto_create_container = auto_create_container

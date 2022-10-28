@@ -110,6 +110,35 @@ CACHES = {
 }
 
 
+# Apache libcloud storage provided by django-storages
+LIBCLOUD_PROVIDERS = {
+    "minio-static": {
+        "type": "libcloud.storage.types.Provider.MINIO",
+        "user": "RUf0ZRYlZy7T5qNM",
+        "key": "g9g6BNic7R9xZJBlPGgbqTSwpOmYYOBm",
+        "bucket": "static",
+        "extra": {
+            "host": "127.0.0.1",
+            "port": 9000,
+            "secure": False,
+            "auto_create_container": True
+        },
+    },
+    "minio-1": {
+        "type": "libcloud.storage.types.Provider.MINIO",
+        "user": "RUf0ZRYlZy7T5qNM",
+        "key": "g9g6BNic7R9xZJBlPGgbqTSwpOmYYOBm",
+        "bucket": "test",
+        "extra": {
+            "host": "127.0.0.1",
+            "port": 9000,
+            "secure": False,
+            "auto_create_container": True
+        },
+    }
+}
+
+
 AUTH_USER_MODEL = "user_manager.User"
 
 # Password validation
@@ -157,30 +186,17 @@ STATICFILES_DIRS = [
     os.path.join(PROJECT_DIR, "static"),
 ]
 
-# ManifestStaticFilesStorage is recommended in production, to prevent outdated
-# JavaScript / CSS assets being served from cache (e.g. after a Wagtail upgrade).
+# LibCloudManifestStaticStorage is recommended in production, to prevent outdated
+# JavaScript / CSS assets being served from cache, but it might be buggy
 # See https://docs.djangoproject.com/en/4.0/ref/contrib/staticfiles/#manifeststaticfilesstorage
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+STATICFILES_STORAGE = "customized.storages.backends.apache_libcloud.LibCloudManifestStaticStorage"
+DEFAULT_LIBCLOUD_STATIC_PROVIDER = "minio-static"
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = "/static/"
 
 
 DEFAULT_FILE_STORAGE = 'customized.storages.backends.apache_libcloud.LibCloudStorage'
-LIBCLOUD_PROVIDERS = {
-    "minio-1": {
-        "type": "libcloud.storage.types.Provider.MINIO",
-        "user": "RUf0ZRYlZy7T5qNM",
-        "key": "g9g6BNic7R9xZJBlPGgbqTSwpOmYYOBm",
-        "bucket": "test",
-        "extra": {
-            "host": "127.0.0.1",
-            "port": 9000,
-            "secure": False,
-            "auto_create_container": True
-        },
-    }
-}
 DEFAULT_LIBCLOUD_PROVIDER = "minio-1"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")

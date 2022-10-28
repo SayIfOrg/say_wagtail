@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.contrib.staticfiles.storage import ManifestFilesMixin
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.deconstruct import deconstructible
 
@@ -51,3 +52,66 @@ class LibCloudStorage(LibCloudStorage):
                 % (self.provider.get("type"), e)
             )
         self.bucket = self.provider["bucket"]  # Limit to one container
+
+    def _read(self, name):
+        obj = self._get_object(name)
+        # https://github.com/jschneier/django-storages/issues/1190 #
+        if obj is None:
+            raise FileNotFoundError(f"{name} does not exist.")
+        #    #    #    #    #    #    #    #    #    #    #    #
+        # I have no idea what is that about #
+        # TOFIX : we should be able to read chunk by chunk
+        # return next(self.driver.download_object_as_stream(obj, obj.size))
+        #   #   #   #   #   #   #   #   #  #
+        bs = bytes()
+        for i in self.driver.download_object_as_stream(obj, obj.size):
+            bs += i
+        return bs
+
+
+class LibCloudStaticStorage(LibCloudStorage):
+    """Querystring auth must be disabled so that url() returns a consistent output."""
+
+    querystring_auth = False
+
+    def __init__(self, *args, provider_name=None, **kwargs):
+        if provider_name is None:
+            provider_name = getattr(
+                settings, "DEFAULT_LIBCLOUD_STATIC_PROVIDER", "default"
+            )
+        super(LibCloudStaticStorage, self).__init__(
+            *args, provider_name=provider_name, **kwargs
+        )
+
+    def url(self, name):
+        """
+        It should not cause any request in order to get static assets,
+        and also it comes handy for "LibCloudManifestStaticStorage" because "ManifestFilesMixin"
+        tries to get the url of hashed file before copping it to storage
+        """
+        object_path = "{}/{}".format(self.bucket, name)
+        conn = self.driver.connection
+        base_url = (
+            "https://" if conn.secure else "http://"
+        ) + f"{conn.host}:{conn.port}"
+        return f"{base_url}/{object_path}"
+
+
+class LibCloudManifestStaticStorage(ManifestFilesMixin, LibCloudStaticStorage):
+    # It might not work properly
+    """Copy the file before saving for compatibility with ManifestFilesMixin
+    which does not play nicely with boto3 automatically closing the file.
+
+    See: https://github.com/boto/s3transfer/issues/80#issuecomment-562356142
+    """
+
+    def __init__(self, *args, **kwargs):
+        manifest_storage = LibCloudStaticStorage()
+        super(LibCloudManifestStaticStorage, self).__init__(
+            *args, manifest_storage=manifest_storage, **kwargs
+        )
+
+    def hashed_name(self, *args, **kwargs):
+        result = super(LibCloudManifestStaticStorage, self).hashed_name(*args, **kwargs)
+        # Don't know why but result contains both "/" and "\"
+        return result.replace("\\", "/")
