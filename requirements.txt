@@ -8,3 +8,4 @@ grpcio>=1.50,<1.51
 grpcio-tools>=1.50,<1.51
 minio>=7.1,<7.2
 psycopg2-binary>=2.9,<2.10
+whitenoise>=6.2,<7.0

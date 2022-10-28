@@ -12,14 +12,6 @@ Minio_CDN_URL_EXPIRY_HOURS = float(
 )
 
 
-def get_content_type(name: str):
-    # TODO complete it and place it somewhere proper
-    if name.endswith(".js"):
-        return "application/javascript"
-    if name.endswith(".css"):
-        return "text/css"
-
-
 class MinIOStorageDriver(OrMinIOStorageDriver):
     supports_s3_multipart_upload = False
 
@@ -35,7 +27,7 @@ class MinIOStorageDriver(OrMinIOStorageDriver):
         extra = extra or {}
         headers = headers or {}
         headers = {**extra, **headers}
-        content_type = headers.get("content_type", get_con_type(object_name))
+        content_type = headers.get("content_type", {})
         meta_data = headers.get("meta_data", None)
 
         object_name = object_name.replace("\\", "/")

@@ -5,6 +5,7 @@ from django.utils.deconstruct import deconstructible
 
 from libcloud.storage.types import Provider
 from storages.backends.apache_libcloud import LibCloudStorage
+from whitenoise.media_types import MediaTypes
 
 from customized.libcloud.storage.providers import get_driver
 
@@ -82,6 +83,16 @@ class LibCloudStaticStorage(LibCloudStorage):
         super(LibCloudStaticStorage, self).__init__(
             *args, provider_name=provider_name, **kwargs
         )
+
+    def _save(self, name, file):
+        # It's essential for static assets to be type known by browsers #
+        content_type = MediaTypes().get_type(name)
+        extra = {"content_type": content_type}
+        #    #    #    #    #    #    #    #    #    #    #    #    #
+        self.driver.upload_object_via_stream(
+            iter(file), self._get_bucket(), name, extra
+        )
+        return name
 
     def url(self, name):
         """
