@@ -19,7 +19,7 @@ class TelegramInstancePanel(Component):
 
     class Media:
         css = {"all": ("css/vendor/bootstrap.min.css",)}
-        js = ("js/vendor/bootstrap.bundle.min.js", "js/vendor/popper.min.js")
+        js = ("js/vendor/bootstrap.bundle.min.js",)
 
 
 class TelegramInstanceCreatePanel(Component):
@@ -39,7 +39,7 @@ class TelegramInstanceCreatePanel(Component):
 
     class Media:
         css = {"all": ("css/vendor/bootstrap.min.css",)}
-        js = ("js/vendor/bootstrap.bundle.min.js", "js/vendor/popper.min.js")
+        js = ("js/vendor/bootstrap.bundle.min.js",)
 
     @staticmethod
     def callback(request):
