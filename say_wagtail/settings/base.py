@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "linked_account",
     "super_page",
     "user_manager",
+    "utils",
 
     "home",
     "search",
@@ -196,7 +197,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = "/static/"
 
 
-DEFAULT_FILE_STORAGE = 'customized.storages.backends.apache_libcloud.LibCloudStorage'
+DEFAULT_FILE_STORAGE = 'utils.storage.DynamicLibCloudStorage'
 DEFAULT_LIBCLOUD_PROVIDER = "minio-1"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
@@ -207,6 +208,7 @@ MEDIA_URL = "/media/"
 
 WAGTAIL_SITE_NAME = "say_wagtail"
 
+WAGTAILIMAGES_IMAGE_MODEL = "utils.DSWImage"
 # Search
 # https://docs.wagtail.org/en/stable/topics/search/backends.html
 WAGTAILSEARCH_BACKENDS = {
