@@ -142,24 +142,6 @@ LIBCLOUD_PROVIDERS = {
 
 AUTH_USER_MODEL = "user_manager.User"
 
-# Password validation
-# https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
-
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
-]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
@@ -187,13 +169,6 @@ STATICFILES_DIRS = [
     os.path.join(PROJECT_DIR, "static"),
 ]
 
-# LibCloudManifestStaticStorage is recommended in production, to prevent outdated
-# JavaScript / CSS assets being served from cache, but it might be buggy
-# See https://docs.djangoproject.com/en/4.0/ref/contrib/staticfiles/#manifeststaticfilesstorage
-STATICFILES_STORAGE = "customized.storages.backends.apache_libcloud.LibCloudManifestStaticStorage"
-DEFAULT_LIBCLOUD_STATIC_PROVIDER = "minio-static"
-
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = "/static/"
 
 

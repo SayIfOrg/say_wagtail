@@ -12,6 +12,14 @@ ALLOWED_HOSTS = ["*"]
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 
+AUTH_PASSWORD_VALIDATORS = []
+
+
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+
 try:
     from .local import *
 except ImportError:
