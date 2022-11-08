@@ -25,6 +25,8 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 INSTALLED_APPS = [
     "django_grpc",
+    "tailwind",
+    "theme",
 
     "linked_account",
     "super_page",
