@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",
+    "wagtail.contrib.settings",
     "wagtail.sites",
     "wagtail.users",
     "wagtail.snippets",
@@ -65,6 +66,8 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
+    "user_manager.middleware.ProjectUserMiddleware",
+    "django_htmx.middleware.HtmxMiddleware",
 ]
 
 ROOT_URLCONF = "say_wagtail.urls"
@@ -141,6 +144,8 @@ LIBCLOUD_PROVIDERS = {
     }
 }
 
+
+PATHS_NEED_SITE = ["^/admin/"]
 
 AUTH_USER_MODEL = "user_manager.User"
 

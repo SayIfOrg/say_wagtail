@@ -1,0 +1,11 @@
+{% for i in object_list %}
+    <li>
+        <button type="button" hx-get="{% url 'project_set_current' i.pk %}"
+                class="inline-flex py-2 px-4 w-full text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
+            <div class="inline-flex items-center">
+                <img style="width: 50px; height: 50px" src="http://localhost:9000/test/images/898407.max-165x165.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=7ckdBbqDfadqjEYP%2F20221108%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20221108T131653Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=2d8bc9f7f094dd851eeed9c4a29e24e19126a2b74e10581dc9df7a4a37d40d75">
+                {{ i }}
+            </div>
+        </button>
+    </li>
+{% endfor %}
