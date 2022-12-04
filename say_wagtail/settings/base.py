@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     "wagtail.embeds",
     "wagtail.contrib.settings",
     "wagtail.sites",
-    "wagtail.users",
+
+    # https://docs.wagtail.org/en/latest/extending/customising_group_views.html
+    "say_wagtail.apps.CustomUsersAppConfig",
     "wagtail.snippets",
     "wagtail.documents",
     "wagtail.images",
@@ -202,6 +204,11 @@ WAGTAILSEARCH_BACKENDS = {
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 WAGTAILADMIN_BASE_URL = "http://example.com"
+
+
+# engAmirEng/wagtail settings
+
+AUTH_GROUP_MODEL = "user_manager.ProjectGroup"
 
 
 # django-grpc configs

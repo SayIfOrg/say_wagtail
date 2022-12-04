@@ -1,7 +1,7 @@
 from django.urls import path
 from wagtail import hooks
 
-from user_manager.views import ProjectListView, change_workon_project
+from .views.views import ProjectListView, change_workon_project
 
 
 @hooks.register("register_admin_urls")

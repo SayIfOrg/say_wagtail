@@ -4,8 +4,8 @@ from django.utils.translation import gettext as _
 from django.views.generic import ListView
 from wagtail.admin import messages
 
-from .models import Project, ProjectUser
-from .utils import set_current_session_project
+from ..models import Project, ProjectUser
+from ..utils import set_current_session_project
 
 
 class ProjectListView(ListView):
