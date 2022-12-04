@@ -44,7 +44,7 @@ COPY --chown=app:app . .
 USER app
 
 # Collect static files.
-RUN python manage.py collectstatic --noinput --clear
+# RUN python manage.py collectstatic --noinput --clear # will not work wothout ready static storage
 
 # Runtime command that executes when "docker run" is called, it does the
 # following:

@@ -1,0 +1,1 @@
+python -m grpc_tools.protoc -I ../protos --python_out=say_wagtail/grpc --grpc_python_out=say_wagtail/grpc ../protos/webpage.proto

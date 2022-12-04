@@ -12,11 +12,10 @@ from customized.libcloud.storage.providers import get_driver
 
 @deconstructible
 class LibCloudStorage(LibCloudStorage):
-    """
-    This overriding is just for passing "extra" kwargs to drivers
-    """
-
     def __init__(self, provider_name=None, option=None):
+        """
+        This overriding is just for passing "extra" kwargs to drivers
+        """
         if provider_name is None:
             provider_name = getattr(settings, "DEFAULT_LIBCLOUD_PROVIDER", "default")
 
