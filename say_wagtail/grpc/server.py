@@ -1,6 +1,6 @@
 from django.core.cache import cache
 
-from . import webpage_pb2, webpage_pb2_grpc
+from sayif_protos import webpage_pb2, webpage_pb2_grpc
 
 
 def grpc_hook(server):

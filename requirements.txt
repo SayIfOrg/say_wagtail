@@ -7,7 +7,8 @@ django-htmx>=1.12,<1.13
 django-storages>=1.13,<1.14
 django-tailwind>=3.4,<3.5
 grpcio>=1.50,<1.51
-grpcio-tools>=1.50,<1.51
 minio>=7.1,<7.2
 psycopg2-binary>=2.9,<2.10
+# sayif_protos
+-e "git+https://github.com/SayIfOrg/say_protos.git#egg=sayif_protos&subdirectory=packages/python"
 whitenoise>=6.2,<7.0

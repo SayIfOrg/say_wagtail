@@ -4,9 +4,8 @@ from wagtail.core.signals import page_published
 from wagtail.core.templatetags.wagtailcore_tags import richtext
 
 import grpc
+from sayif_protos import webpage_pb2_grpc, webpage_pb2
 
-from say_wagtail.grpc import webpage_pb2_grpc
-from say_wagtail.grpc import webpage_pb2
 from .models import SimplePage
 
 

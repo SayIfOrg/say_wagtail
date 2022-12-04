@@ -9,8 +9,9 @@ from wagtail.admin.widgets import SwitchInput
 from wagtail.models import Orderable
 from wagtail.snippets.models import register_snippet
 
+from sayif_protos import webpage_pb2_grpc, webpage_pb2
+
 from linked_account.views import telegram_instance_chooser_viewset
-from say_wagtail.grpc import webpage_pb2_grpc, webpage_pb2
 
 
 class TelegramActionForm(WagtailAdminModelForm):
