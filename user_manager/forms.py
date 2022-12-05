@@ -1,16 +1,15 @@
 from django import forms
+from wagtail.models import SiteGroup
 from wagtail.users.forms import GroupForm as WagtailGroupForm
 
-from .models import ProjectGroup
 
-
-class ProjectGroupForm(WagtailGroupForm):
-    def __init__(self, *args, project=None, **kwargs):
-        super(ProjectGroupForm, self).__init__(*args, **kwargs)
-        self.project = project
+class SiteGroupForm(WagtailGroupForm):
+    def __init__(self, *args, site=None, **kwargs):
+        super(SiteGroupForm, self).__init__(*args, **kwargs)
+        self.site = site
 
     class Meta:
-        model = ProjectGroup
+        model = SiteGroup
         fields = (
             "name",
             "permissions",
@@ -31,7 +30,7 @@ class ProjectGroupForm(WagtailGroupForm):
             # this form is not bound; we're probably creating a new group
             untouchable_permissions = []
         if not self.instance.pk:
-            self.instance.project = self.project
-        project_group = super(ProjectGroupForm, self).save(commit=commit)
+            self.instance.site = self.site
+        project_group = super(SiteGroupForm, self).save(commit=commit)
         project_group.permissions.add(*untouchable_permissions)
         return project_group

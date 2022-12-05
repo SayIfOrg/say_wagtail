@@ -1,11 +1,11 @@
+from wagtail.models import SiteGroup
 from wagtail.users.views.groups import (
     GroupViewSet as WagtailGroupViewSet,
     CreateView as WagtailCreateView,
     DeleteView as WagtailDeleteView,
 )
 
-from ..forms import ProjectGroupForm
-from ..models import ProjectGroup
+from user_manager.forms import SiteGroupForm
 
 
 class CreateView(WagtailCreateView):
@@ -21,9 +21,9 @@ class CreateView(WagtailCreateView):
         POST variables and then check if it's valid.
         """
         # Create an object now so that the permission panel forms have something to link them against
-        # Change Group() to ProjectGroup() #
+        # Change Group() to SiteGroup() #
         #  #  #  #  #  #  #  #  #  #  #  #
-        self.object = ProjectGroup()
+        self.object = SiteGroup()
 
         form = self.get_form()
         permission_panels = self.get_permission_panel_forms()
@@ -41,15 +41,15 @@ class CreateView(WagtailCreateView):
 class DeleteView(WagtailDeleteView):
     def get_context_data(self, **kwargs):
         context = super(DeleteView, self).get_context_data()
-        context["group"] = context["projectgroup"]
+        context["group"] = context["sitegroup"]
         return context
 
 
 class GroupViewSet(WagtailGroupViewSet):
-    model = ProjectGroup
+    model = SiteGroup
 
     add_view_class = CreateView
     delete_view_class = DeleteView
 
     def get_form_class(self, for_update=False):
-        return ProjectGroupForm
+        return SiteGroupForm

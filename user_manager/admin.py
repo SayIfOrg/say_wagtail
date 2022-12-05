@@ -1,9 +1,12 @@
 from django.contrib import admin
+from wagtail.models.sites import get_site_user_model
 
-from .models import ProjectUser, Project
+from .models import Project
+
+SiteUser = get_site_user_model()
 
 
-@admin.register(ProjectUser)
+@admin.register(SiteUser)
 class ProjectUserAdmin(admin.ModelAdmin):
     pass
 
@@ -11,4 +14,3 @@ class ProjectUserAdmin(admin.ModelAdmin):
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
     pass
-

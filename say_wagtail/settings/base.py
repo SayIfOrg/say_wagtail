@@ -147,8 +147,6 @@ LIBCLOUD_PROVIDERS = {
 }
 
 
-PATHS_NEED_SITE = ["^/admin/"]
-
 AUTH_USER_MODEL = "user_manager.User"
 
 
@@ -208,7 +206,8 @@ WAGTAILADMIN_BASE_URL = "http://example.com"
 
 # engAmirEng/wagtail settings
 
-AUTH_GROUP_MODEL = "user_manager.ProjectGroup"
+SITE_USER_MODEL = "user_manager.SiteUser"
+PATHS_NEED_SITE = ["^/admin/"]
 
 
 # django-grpc configs
