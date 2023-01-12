@@ -1,14 +1,19 @@
 Django>=4.1,<4.2
+# wagtail(sayif modification) #
 #git+https://github.com/engAmirEng/wagtail.git@say-if/4.1.x
+-e ../../wagtail
+#   #   #   #   #   #   #   #
 apache-libcloud>=3.6,<3.7
-black>=22.10,<22.11
 django-grpc>=1.0,<1.1
 django-htmx>=1.12,<1.13
 django-storages>=1.13,<1.14
 django-tailwind>=3.4,<3.5
 grpcio>=1.50,<1.51
+grpcio-tools>=1.50,<1.51
 minio>=7.1,<7.2
 psycopg2-binary>=2.9,<2.10
-# sayif_protos
--e "git+https://github.com/SayIfOrg/say_protos.git#egg=sayif_protos&subdirectory=packages/python"
+# say_protos #
+#-e "git+https://github.com/SayIfOrg/say_protos.git#egg=sayif_protos&subdirectory=packages/python"
+-e ../say_protos/packages/python
+#   #   #   #
 whitenoise>=6.2,<7.0
