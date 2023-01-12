@@ -68,7 +68,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
-    "user_manager.middleware.ProjectUserMiddleware",
+    "wagtail.sites.middleware.SiteUserMiddleware",
     "django_htmx.middleware.HtmxMiddleware",
 ]
 
