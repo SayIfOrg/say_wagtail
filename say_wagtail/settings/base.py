@@ -40,9 +40,7 @@ INSTALLED_APPS = [
     "wagtail.embeds",
     "wagtail.contrib.settings",
     "wagtail.sites",
-
-    # https://docs.wagtail.org/en/latest/extending/customising_group_views.html
-    "say_wagtail.apps.CustomUsersAppConfig",
+    "wagtail.users",
     "wagtail.snippets",
     "wagtail.documents",
     "wagtail.images",
