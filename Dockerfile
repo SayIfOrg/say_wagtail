@@ -58,4 +58,4 @@ USER app
 # grpc servieve
 # CMD set -xe; python manage.py migrate --noinput; python manage.py grpcserver --port 5061
 # web servieve
-CMD set -xe; python manage.py migrate --noinput; gunicorn say_wagtail.wsgi:application
+CMD set -xe; python manage.py migrate --noinput; gunicorn config.wsgi:application
