@@ -109,6 +109,9 @@ DATABASES = {
     "default": env.db_url("DATABASE_URL")
 }
 
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
 CACHES = {
     # default
     "default": env.cache_url("CACHE_URL")
