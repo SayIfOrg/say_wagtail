@@ -1,7 +1,28 @@
 from django.utils.deconstruct import deconstructible
 
-from say.customized.storages.backends.apache_libcloud import LibCloudStorage
+from storages.backends.apache_libcloud import LibCloudFile as BaseLibCloudFile
+
+from say.customized.storages.backends.apache_libcloud import (
+    LibCloudStorage as BaseLibCloudStorage,
+)
 from say.dynamic_storage.storage import Storage as DynamicStorage
+
+
+@deconstructible
+class LibCloudStorage(BaseLibCloudStorage):
+    def _open(self, name, mode="rb"):
+        remote_file = LibCloudFile(name, self, mode=mode)
+        return remote_file
+
+
+class LibCloudFile(BaseLibCloudFile):
+    def open(self, mode=None):
+        """Reopenable LibCloudFile"""
+        if self.closed:
+            self.file = self._storage.open(self.name, mode=mode)
+        else:
+            super(LibCloudFile, self).open(mode=mode)
+        return self
 
 
 @deconstructible
