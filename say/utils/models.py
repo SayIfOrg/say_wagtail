@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from wagtail.images import models as wagtail_models
+from wagtail.images.models import get_rendition_upload_to, get_rendition_storage
 
 from say.dynamic_storage.models import DynamicImageField
 
@@ -34,6 +35,13 @@ class DSWImage(DSWAbstractImage):
 
 class DSWRendition(wagtail_models.AbstractRendition):
     """Dynamic Storage Wagtail Rendition"""
+    file = DynamicImageField(
+        upload_to=get_rendition_upload_to,
+        storage=get_rendition_storage,
+        width_field="width",
+        height_field="height",
+    )
+
     image = models.ForeignKey(
         DSWImage, related_name="renditions", on_delete=models.CASCADE
     )
