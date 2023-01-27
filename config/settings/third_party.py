@@ -17,6 +17,7 @@ env = environ.Env(
 WAGTAIL_SITE_NAME = "say_wagtail"
 
 WAGTAILIMAGES_IMAGE_MODEL = "utils.DSWImage"
+WAGTAILIMAGES_IMAGE_FORM_BASE = "say.utils.forms.DSWImageForm"
 
 # Search
 # https://docs.wagtail.org/en/stable/topics/search/backends.html

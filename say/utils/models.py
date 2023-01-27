@@ -73,7 +73,7 @@ class DSWAbstractImage(Monkey, wagtail_models.AbstractImage):
 class DSWImage(DSWAbstractImage):
     """Dynamic Storage Wagtail Image"""
 
-    admin_form_fields = wagtail_models.Image.admin_form_fields
+    admin_form_fields = wagtail_models.Image.admin_form_fields + ("storage",)
 
     class Meta(DSWAbstractImage.Meta):
         verbose_name = _("image")
