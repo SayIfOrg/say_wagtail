@@ -1,0 +1,26 @@
+{% extends "modeladmin/create.html" %}
+{% comment %}
+List of overwrites:
+    - id="formfields" added to the desired element
+    - #formfields content transmitedt to "storage/modeladmin/storageaccount/htmx/create_formfields.html"
+{% endcomment %}
+
+{% block content %}
+
+    {% block header %}
+        {{ block.super }}
+    {% endblock %}
+
+    <form action="{% block form_action %}{{ block.super }}{% endblock %}{% if locale %}?locale={{ locale.language_code }}{% endif %}"{% if is_multipart %} enctype="multipart/form-data"{% endif %} method="POST" novalidate>
+        {% csrf_token %}
+
+        <div id="formfields" class="nice-padding">
+            {% include "storage/modeladmin/storageaccount/htmx/create_formfields.html" %}
+        </div>
+
+        {% block footer %}
+            {{ block.super }}
+        {% endblock %}
+    </form>
+
+{% endblock %}

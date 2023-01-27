@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     "say.theme",
 
     "say.linked_account",
+    "say.storage",
     "say.super_page",
     "say.user_manager",
     "say.utils",
@@ -43,8 +44,9 @@ INSTALLED_APPS = [
     "say.search",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
-    "wagtail.embeds",
     "wagtail.contrib.settings",
+    "wagtail.contrib.modeladmin",
+    "wagtail.embeds",
     "wagtail.sites",
     "wagtail.users",
     "wagtail.snippets",

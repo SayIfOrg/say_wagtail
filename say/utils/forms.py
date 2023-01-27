@@ -1,6 +1,7 @@
 from django import forms
 from wagtail.images.forms import BaseImageForm
 
+from say.storage.models import StorageAccount
 from .templatetags.storage import get_siteuser_storage_choices
 
 
@@ -17,10 +18,12 @@ class DSWImageForm(BaseImageForm):
         value: str = self.cleaned_data["storage"]
         if value:
             if value != "default":
-                # TODO
-                raise NotImplementedError
+                storage_account_id = value.split("-")[1]
+                storage = StorageAccount.objects.get(
+                    pk=storage_account_id
+                ).get_storage()
             else:
-                from .storage import DynamicLibCloudStorage
+                from say.utils.storage import DynamicLibCloudStorage
 
                 storage = DynamicLibCloudStorage(provider_name="minio-static")
             self.instance.file.destination_storage = storage
