@@ -5,7 +5,7 @@ from storages.backends.apache_libcloud import LibCloudFile as BaseLibCloudFile
 from say.customized.storages.backends.apache_libcloud import (
     LibCloudStorage as BaseLibCloudStorage,
 )
-from say.dynamic_storage.storage import Storage as DynamicStorage
+from say.dynamic_storage.storage import DynamicStorageMixin
 
 
 @deconstructible
@@ -26,7 +26,7 @@ class LibCloudFile(BaseLibCloudFile):
 
 
 @deconstructible
-class DynamicLibCloudStorage(DynamicStorage, LibCloudStorage):
+class DynamicLibCloudStorage(DynamicStorageMixin, LibCloudStorage):
     def __init__(self, provider_name=None, option=None):
         super(DynamicLibCloudStorage, self).__init__(
             provider_name=provider_name, option=option

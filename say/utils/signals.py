@@ -2,7 +2,7 @@ from django.dispatch import receiver
 
 from say.dynamic_storage.models import DynamicFieldFile
 from say.dynamic_storage.signals import pre_dynamic_file_save
-from say.dynamic_storage.storage import Storage
+from say.dynamic_storage.storage import DynamicStorage
 
 from . import models
 
@@ -11,7 +11,7 @@ from . import models
 def image_rendition_same_storage(
     instance: models.DSWRendition,
     field_file: DynamicFieldFile,
-    to_storage: Storage,
+    to_storage: DynamicStorage,
     *args,
     **kwargs
 ):

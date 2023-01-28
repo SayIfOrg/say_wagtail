@@ -2,12 +2,16 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import Optional
 
-from django.core.exceptions import ImproperlyConfigured, ValidationError as DJValidationError
+from django.core.exceptions import (
+    ImproperlyConfigured,
+    ValidationError as DJValidationError,
+)
+from django.core.files.storage import Storage
 
 from pydantic import BaseModel, conint, constr, ValidationError
 
 from say.customized.libcloud.storage.drivers.minio import MinIOStorageDriver
-from say.dynamic_storage.storage import Storage as DynamicStorage
+from say.dynamic_storage.storage import DynamicStorageMixin
 from say.utils.storage import LibCloudStorage
 
 
@@ -15,7 +19,7 @@ class StorageDoesNotExists(Exception):
     pass
 
 
-class AbstractBaseStorage(DynamicStorage):
+class AbstractBaseStorage(DynamicStorageMixin, Storage):
     IDENTITY: str
 
     @abstractmethod
@@ -67,7 +71,9 @@ class MinioStorage(AbstractBaseStorage, LibCloudStorage):
         self.provider = dict()
         self.provider["type"] = "libcloud.storage.types.Provider.MINIO"
 
-        assert (storage_account_id or storage_account) and not (storage_account_id and storage_account)
+        assert (storage_account_id or storage_account) and not (
+            storage_account_id and storage_account
+        )
         from .models import StorageAccount
 
         args = (
@@ -103,6 +109,7 @@ class MinioStorage(AbstractBaseStorage, LibCloudStorage):
             return cls.Schema(**args)
         except ValidationError as e:
             raise DJValidationError(str(e))
+
 
 class Minio2Storage(MinioStorage):
     IDENTITY = "libcloud_minio2"
