@@ -40,8 +40,11 @@ class StorageAccount(models.Model):
     title = models.CharField(max_length=127)
     args = models.JSONField(default=dict)
 
+    def get_storage_class(self) -> AbstractBaseStorage.__class__:
+        return get_storage_by_identity(self.type)
+
     def get_storage(self) -> AbstractBaseStorage:
-        return get_storage_by_identity(self.type)(storage_account=self)
+        return self.get_storage_class()(storage_account=self)
 
     def check_args(self):
         SelectedStorage = get_storage_by_identity(self.type)

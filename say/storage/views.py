@@ -1,7 +1,10 @@
 from wagtail.contrib.modeladmin.options import ModelAdmin
-from wagtail.contrib.modeladmin.views import CreateView
+from wagtail.contrib.modeladmin.views import CreateView, EditView
 
-from .forms import get_storage_account_edit_handler
+from .forms import (
+    get_create_storage_account_edit_handler,
+    get_edit_storage_account_edit_handler,
+)
 from .models import StorageAccount
 
 
@@ -18,12 +21,20 @@ class StorageAccountCreateView(CreateView):
         return super(StorageAccountCreateView, self).get_template_names()
 
     def get_edit_handler(self):
-        edit_handler = get_storage_account_edit_handler(self.request)
+        edit_handler = get_create_storage_account_edit_handler(
+            self.request.GET or self.request.POST
+        )
         return edit_handler.bind_to_model(self.model_admin.model)
 
     def form_valid(self, form):
         form.instance.site = self.request.user.site_user.site
         return super(StorageAccountCreateView, self).form_valid(form)
+
+
+class StorageAccountEditView(EditView):
+    def get_edit_handler(self):
+        edit_handler = get_edit_storage_account_edit_handler(self.instance)
+        return edit_handler.bind_to_model(self.model_admin.model)
 
 
 class StorageAccountAdmin(ModelAdmin):
@@ -39,3 +50,7 @@ class StorageAccountAdmin(ModelAdmin):
 
     create_view_class = StorageAccountCreateView
     create_template_name = "storage/modeladmin/storageaccount/create.html"
+    edit_view_class = StorageAccountEditView
+
+    def get_edit_handler(self, instance=None, request=None):
+        raise ValueError("Make sure using view specific edit handler")
