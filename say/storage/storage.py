@@ -38,16 +38,9 @@ class AccountStorageMixin(DynamicStorageMixin, ABC):
         )
         args = self.validate_to_obj_args(args)
 
-        self.get_the_storage_class().__init__(self, **args.dict())
+        super().__init__(**args.dict())
         self._storage_account_id = storage_account_id or storage_account.pk
         self._storage_account: Optional[StorageAccount] = None
-
-    @classmethod
-    def get_the_storage_class(cls) -> type(Storage):
-        try:
-            return [i for i in cls.__bases__ if issubclass(i, Storage)][-1]
-        except IndexError:
-            raise Exception("Last base of this class is not a DjStorage")
 
     def init_params(self) -> dict:
         return {"storage_account_id": self.storage_account_id}
