@@ -40,7 +40,7 @@ class AccountStorageMixin(DynamicStorageMixin, ABC):
 
         self.get_the_storage_class().__init__(self, **args.dict())
         self._storage_account_id = storage_account_id or storage_account.pk
-        self._storage_account = None
+        self._storage_account: Optional[StorageAccount] = None
 
     @classmethod
     def get_the_storage_class(cls) -> type(Storage):
@@ -83,7 +83,7 @@ class AccountStorage(AccountStorageMixin, Storage):
 
 
 @deconstructible
-class MinioStorage(AccountStorageMixin, MinioStorage):
+class MinioAccountStorage(AccountStorageMixin, MinioStorage):
     IDENTITY = "libcloud_minio"
 
     class Schema(BaseModel):
@@ -100,7 +100,7 @@ class MinioStorage(AccountStorageMixin, MinioStorage):
         return "First LibCloud Minio"
 
 
-class Minio2Storage(MinioStorage):
+class Minio2AccountStorage(MinioAccountStorage):
     IDENTITY = "libcloud_minio2"
 
     @classmethod

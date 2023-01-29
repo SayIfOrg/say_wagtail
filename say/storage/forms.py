@@ -8,7 +8,7 @@ from django.utils.translation import gettext as _
 from wagtail.admin.forms import WagtailAdminModelForm
 from wagtail.admin.panels import ObjectList, FieldPanel
 
-from .storage import get_storage_by_identity, MinioStorage, Minio2Storage
+from .storage import get_storage_by_identity, MinioAccountStorage, Minio2AccountStorage
 from .models import StorageAccount, AVAILABLE_STORAGES
 
 
@@ -164,9 +164,9 @@ def get_create_storage_account_edit_handler(data: Mapping[str, Any]) -> ObjectLi
     if not base_storage_form.is_valid():
         return get_base_sa_edit_handler()
     storage_class = base_storage_form.get_selected_storage_class()
-    if storage_class == MinioStorage:
+    if storage_class == MinioAccountStorage:
         return get_minio_sa_edit_handler()
-    elif storage_class == Minio2Storage:
+    elif storage_class == Minio2AccountStorage:
         return get_minio2_sa_edit_handler()
     else:
         raise ImproperlyConfigured
@@ -174,9 +174,9 @@ def get_create_storage_account_edit_handler(data: Mapping[str, Any]) -> ObjectLi
 
 def get_edit_storage_account_edit_handler(instance: StorageAccount) -> ObjectList:
     storage_class = instance.get_storage_class()
-    if storage_class == MinioStorage:
+    if storage_class == MinioAccountStorage:
         return get_minio_sa_edit_handler()
-    elif storage_class == Minio2Storage:
+    elif storage_class == Minio2AccountStorage:
         return get_minio2_sa_edit_handler()
     else:
         raise ImproperlyConfigured

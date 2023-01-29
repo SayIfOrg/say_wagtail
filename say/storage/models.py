@@ -4,15 +4,15 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from .storage import (
-    MinioStorage,
-    Minio2Storage,
+    MinioAccountStorage,
+    Minio2AccountStorage,
     get_storage_by_identity,
     AccountStorage,
 )
 
 AVAILABLE_STORAGES = [
-    MinioStorage,
-    Minio2Storage,
+    MinioAccountStorage,
+    Minio2AccountStorage,
 ]
 
 
