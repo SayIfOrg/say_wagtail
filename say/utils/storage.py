@@ -2,6 +2,7 @@ from django.utils.deconstruct import deconstructible
 
 from storages.backends.apache_libcloud import LibCloudFile as BaseLibCloudFile
 
+from say.customized.libcloud.storage.drivers.minio import MinIOStorageDriver
 from say.customized.storages.backends.apache_libcloud import (
     LibCloudStorage as BaseLibCloudStorage,
 )
@@ -35,3 +36,26 @@ class DynamicLibCloudStorage(DynamicStorageMixin, LibCloudStorage):
 
     def init_params(self) -> dict:
         return {"provider_name": self.provider_name}
+
+
+@deconstructible
+class MinioStorage(LibCloudStorage):
+    def __init__(
+        self, /, key, secret, host, port, secure, bucket, auto_create_container
+    ):
+        self.provider = dict()
+        self.provider["type"] = "libcloud.storage.types.Provider.MINIO"
+
+        self.driver = MinIOStorageDriver(
+            key,
+            secret=secret,
+            host=host,
+            port=port,
+            secure=secure,
+            auto_create_container=auto_create_container,
+        )
+        self._bucket = bucket
+
+    @property
+    def bucket(self):
+        return self._bucket

@@ -3,7 +3,12 @@ from django.core.exceptions import ValidationError, ImproperlyConfigured
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from .storage import MinioStorage, Minio2Storage, get_storage_by_identity, AbstractBaseStorage
+from .storage import (
+    MinioStorage,
+    Minio2Storage,
+    get_storage_by_identity,
+    AccountStorage,
+)
 
 AVAILABLE_STORAGES = [
     MinioStorage,
@@ -40,21 +45,19 @@ class StorageAccount(models.Model):
     title = models.CharField(max_length=127)
     args = models.JSONField(default=dict)
 
-    def get_storage_class(self) -> AbstractBaseStorage.__class__:
+    def get_storage_class(self) -> AccountStorage.__class__:
         return get_storage_by_identity(self.type)
 
-    def get_storage(self) -> AbstractBaseStorage:
+    def get_storage(self) -> AccountStorage:
         return self.get_storage_class()(storage_account=self)
 
     def check_args(self):
         SelectedStorage = get_storage_by_identity(self.type)
         self.args = SelectedStorage.validate_to_obj_args(self.args).dict()
 
-    def save(
-        self, force_insert=False, force_update=False, using=None, update_fields=None
-    ):
+    def save(self, *args, **kwargs):
         try:
             self.check_args()
         except ValidationError:
             raise
-        return super(StorageAccount, self).save(force_insert=False, force_update=False, using=None, update_fields=None)
+        return super(StorageAccount, self).save(*args, **kwargs)

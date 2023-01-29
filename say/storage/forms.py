@@ -65,7 +65,7 @@ class MinioSAAdminModelForm(StorageAccountBaseAdminModelForm):
     host = forms.CharField(max_length=255)
     port = forms.CharField(max_length=5, min_length=2, validators=[integer_validator])
     secure = forms.BooleanField(required=False, initial=True)
-    bucket = forms.CharField(max_length=63)
+    bucket = forms.CharField(max_length=63, min_length=3)
     auto_create_container = forms.BooleanField(required=False, initial=True)
 
     def __init__(self, *args, **kwargs):
@@ -93,7 +93,7 @@ class Minio2SAAdminModelForm(StorageAccountBaseAdminModelForm):
     host = forms.CharField(max_length=255)
     port = forms.CharField(max_length=5, min_length=2, validators=[integer_validator])
     secure = forms.BooleanField(required=False, initial=True)
-    bucket = forms.CharField(max_length=63)
+    bucket = forms.CharField(max_length=63, min_length=3)
     auto_create_container = forms.BooleanField(required=False, initial=True)
 
     def __init__(self, *args, **kwargs):

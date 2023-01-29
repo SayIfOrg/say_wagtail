@@ -7,70 +7,25 @@ from django.core.exceptions import (
     ValidationError as DJValidationError,
 )
 from django.core.files.storage import Storage
+from django.utils.deconstruct import deconstructible
 
 from pydantic import BaseModel, conint, constr, ValidationError
 
-from say.customized.libcloud.storage.drivers.minio import MinIOStorageDriver
 from say.dynamic_storage.storage import DynamicStorageMixin
-from say.utils.storage import LibCloudStorage
+from say.utils.storage import MinioStorage
 
 
 class StorageDoesNotExists(Exception):
     pass
 
 
-class AbstractBaseStorage(DynamicStorageMixin, Storage):
+class AccountStorageMixin(DynamicStorageMixin, ABC):
     IDENTITY: str
-
-    @abstractmethod
-    def __init__(
-        self, /, storage_account_id: Optional[int] = None, args: Optional[dict] = None
-    ):
-        ...
-
-    def init_params(self) -> dict:
-        return {"storage_account_id": self.storage_account_id}
-
-    @classmethod
-    @abstractmethod
-    def title(cls) -> str:
-        ...
-
-    @classmethod
-    @abstractmethod
-    def validate_to_obj_args(cls, args: dict) -> object:
-        ...
-
-    @property
-    def storage_account_id(self):
-        return self._storage_account_id
-
-    def get_storage_account(self):
-        if not self._storage_account:
-            self._storage_account = StorageAccount.objects.get(
-                pk=self.storage_account_id
-            )
-        return self._storage_account
-
-
-class MinioStorage(AbstractBaseStorage, LibCloudStorage):
-    IDENTITY = "libcloud_minio"
-
-    class Schema(BaseModel):
-        key: str
-        secret: str
-        host: str
-        port: conint(gt=79, lt=99999)
-        secure: bool
-        bucket: constr(min_length=1, max_length=127)
-        auto_create_container: bool
+    Schema: BaseModel
 
     def __init__(
         self, /, storage_account_id: Optional[int] = None, storage_account=None
     ):
-        self.provider = dict()
-        self.provider["type"] = "libcloud.storage.types.Provider.MINIO"
-
         assert (storage_account_id or storage_account) and not (
             storage_account_id and storage_account
         )
@@ -83,32 +38,66 @@ class MinioStorage(AbstractBaseStorage, LibCloudStorage):
         )
         args = self.validate_to_obj_args(args)
 
-        self.driver = MinIOStorageDriver(
-            args.key,
-            secret=args.secret,
-            host=args.host,
-            port=args.port,
-            secure=args.secure,
-            auto_create_container=args.auto_create_container,
-        )
-        self._bucket = args.bucket
+        self.get_the_storage_class().__init__(self, **args.dict())
         self._storage_account_id = storage_account_id or storage_account.pk
         self._storage_account = None
 
-    @property
-    def bucket(self):
-        return self._bucket
+    @classmethod
+    def get_the_storage_class(cls) -> type(Storage):
+        try:
+            return [i for i in cls.__bases__ if issubclass(i, Storage)][-1]
+        except IndexError:
+            raise Exception("Last base of this class is not a DjStorage")
+
+    def init_params(self) -> dict:
+        return {"storage_account_id": self.storage_account_id}
 
     @classmethod
-    def title(cls) -> str:
-        return "First LibCloud Minio"
-
-    @classmethod
-    def validate_to_obj_args(cls, args: dict) -> Schema:
+    def validate_to_obj_args(cls, args: dict) -> BaseModel:
         try:
             return cls.Schema(**args)
         except ValidationError as e:
             raise DJValidationError(str(e))
+
+    @property
+    def storage_account_id(self):
+        return self._storage_account_id
+
+    def get_storage_account(self):
+        if not self._storage_account:
+            from say.storage.models import StorageAccount
+
+            self._storage_account = StorageAccount.objects.get(
+                pk=self.storage_account_id
+            )
+        return self._storage_account
+
+    @classmethod
+    @abstractmethod
+    def title(cls) -> str:
+        ...
+
+
+class AccountStorage(AccountStorageMixin, Storage):
+    ...
+
+
+@deconstructible
+class MinioStorage(AccountStorageMixin, MinioStorage):
+    IDENTITY = "libcloud_minio"
+
+    class Schema(BaseModel):
+        key: str
+        secret: str
+        host: str
+        port: conint(gt=79, lt=99999)
+        secure: bool
+        bucket: constr(min_length=3, max_length=127)
+        auto_create_container: bool
+
+    @classmethod
+    def title(cls) -> str:
+        return "First LibCloud Minio"
 
 
 class Minio2Storage(MinioStorage):
@@ -119,7 +108,7 @@ class Minio2Storage(MinioStorage):
         return "fdsf"
 
 
-def get_storage_by_identity(identity: str) -> type(AbstractBaseStorage):
+def get_storage_by_identity(identity: str) -> type(AccountStorage):
     from say.storage.models import AVAILABLE_STORAGES
 
     filtered = [i for i in AVAILABLE_STORAGES if i.IDENTITY == identity]
