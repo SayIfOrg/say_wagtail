@@ -53,7 +53,7 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 (
-                    "permissions",
+                    "site_user_permissions",
                     models.ManyToManyField(
                         blank=True,
                         help_text="Specific permissions for this user.",
