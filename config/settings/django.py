@@ -120,6 +120,8 @@ CACHES = {
 }
 
 
+AUTHENTICATION_BACKENDS = ["wagtail.sites.backends.SiteAuthBackend", "django.contrib.auth.backends.ModelBackend"]
+
 AUTH_USER_MODEL = "user_manager.User"
 
 AUTH_PASSWORD_VALIDATORS = [
