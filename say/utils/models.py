@@ -2,14 +2,15 @@ from contextlib import contextmanager
 
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from wagtail.images import models as wagtail_models
+from wagtail.documents import models as wagtail_document_models
+from wagtail.images import models as wagtail_image_models
 from wagtail.images.models import (
     SourceImageIOError,
     get_rendition_upload_to,
     get_rendition_storage,
 )
 
-from say.dynamic_storage.models import DynamicImageField
+from say.dynamic_storage.models import DynamicImageField, DynamicFileField
 
 
 class Monkey:
@@ -56,24 +57,24 @@ class Monkey:
                 image_file.close()
 
 
-class DSWAbstractImage(Monkey, wagtail_models.AbstractImage):
+class DSWAbstractImage(Monkey, wagtail_image_models.AbstractImage):
     """Dynamic Storage Wagtail Abstract Image"""
 
     file = DynamicImageField(
         verbose_name=_("file"),
-        upload_to=wagtail_models.get_upload_to,
+        upload_to=wagtail_image_models.get_upload_to,
         width_field="width",
         height_field="height",
     )
 
-    class Meta:
+    class Meta(wagtail_image_models.AbstractImage.Meta):
         abstract = True
 
 
 class DSWImage(DSWAbstractImage):
     """Dynamic Storage Wagtail Image"""
 
-    admin_form_fields = wagtail_models.Image.admin_form_fields + ("storage",)
+    admin_form_fields = wagtail_image_models.Image.admin_form_fields + ("storage",)
 
     class Meta(DSWAbstractImage.Meta):
         verbose_name = _("image")
@@ -83,7 +84,7 @@ class DSWImage(DSWAbstractImage):
         ]
 
 
-class DSWRendition(Monkey, wagtail_models.AbstractRendition):
+class DSWRendition(Monkey, wagtail_image_models.AbstractRendition):
     """Dynamic Storage Wagtail Rendition"""
 
     file = DynamicImageField(
@@ -97,5 +98,27 @@ class DSWRendition(Monkey, wagtail_models.AbstractRendition):
         DSWImage, related_name="renditions", on_delete=models.CASCADE
     )
 
-    class Meta:
+    class Meta(wagtail_image_models.AbstractImage.Meta):
         unique_together = (("image", "filter_spec", "focal_point_key"),)
+
+
+class DSWAbstractDocument(wagtail_document_models.AbstractDocument):
+    """Dynamic Storage Wagtail Abstract Document"""
+
+    file = DynamicFileField(upload_to="documents", verbose_name=_("file"))
+
+    class Meta(wagtail_document_models.AbstractDocument.Meta):
+        abstract = True
+
+
+class DSWDocument(DSWAbstractDocument):
+    """Dynamic Storage Wagtail Document"""
+
+    admin_form_fields = wagtail_document_models.Document.admin_form_fields + (
+        "storage",
+    )
+
+    class Meta(DSWAbstractDocument.Meta):
+        permissions = [
+            ("choose_document", "Can choose document"),
+        ]

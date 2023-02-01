@@ -19,6 +19,10 @@ WAGTAIL_SITE_NAME = "say_wagtail"
 WAGTAILIMAGES_IMAGE_MODEL = "utils.DSWImage"
 WAGTAILIMAGES_IMAGE_FORM_BASE = "say.utils.forms.DSWImageForm"
 
+WAGTAILDOCS_DOCUMENT_MODEL = "utils.DSWDocument"
+WAGTAILDOCS_DOCUMENT_FORM_BASE = "say.utils.forms.DSWDocumentForm"
+
+
 # Search
 # https://docs.wagtail.org/en/stable/topics/search/backends.html
 WAGTAILSEARCH_BACKENDS = {
