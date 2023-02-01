@@ -30,40 +30,42 @@ CSRF_TRUSTED_ORIGINS = env.list(
 
 
 INSTALLED_APPS = [
-    "django_grpc",
-    "tailwind",
-    "say.theme",
-
+    "say.home",
     "say.linked_account",
+    "say.search",
     "say.storage",
     "say.super_page",
+    "say.theme",
     "say.user_manager",
     "say.utils",
 
-    "say.home",
-    "say.search",
+    "django_browser_reload",
+    "django_grpc",
+    "tailwind",
+
+    "wagtail",
+    "wagtail.admin",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.settings",
     "wagtail.contrib.modeladmin",
-    "wagtail.embeds",
-    "wagtail.sites",
-    "wagtail.users",
-    "wagtail.snippets",
     "wagtail.documents",
+    "wagtail.embeds",
     "wagtail.images",
     "wagtail.search",
-    "wagtail.admin",
-    "wagtail",
+    "wagtail.sites",
+    "wagtail.snippets",
+    "wagtail.users",
+
     "modelcluster",
     "taggit",
+
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
-    "django.contrib.sessions",
     "django.contrib.messages",
+    "django.contrib.sessions",
     "django.contrib.staticfiles",
-    "django_browser_reload",
 ]
 
 MIDDLEWARE = [
