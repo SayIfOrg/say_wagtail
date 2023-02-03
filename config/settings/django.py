@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     "wagtail",
     "wagtail.admin",
+    "wagtail.api.v2",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.settings",
@@ -58,6 +59,7 @@ INSTALLED_APPS = [
     "wagtail.users",
 
     "modelcluster",
+    "rest_framework",
     "taggit",
 
     "django.contrib.admin",
@@ -122,7 +124,10 @@ CACHES = {
 }
 
 
-AUTHENTICATION_BACKENDS = ["wagtail.sites.backends.SiteAuthBackend", "django.contrib.auth.backends.ModelBackend"]
+AUTHENTICATION_BACKENDS = [
+    "wagtail.sites.backends.SiteAuthBackend",
+    "django.contrib.auth.backends.ModelBackend",
+]
 
 AUTH_USER_MODEL = "user_manager.User"
 

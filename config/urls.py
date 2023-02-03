@@ -1,12 +1,12 @@
 from django.conf import settings
 from django.urls import include, path
 from django.contrib import admin
-
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
 from say.search import views as search_views
+from .api import wagtailapi_router
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
@@ -27,6 +27,7 @@ if settings.DEBUG:
     urlpatterns.append(path("__reload__/", include("django_browser_reload.urls")))
 
 urlpatterns = urlpatterns + [
+    path("api/", wagtailapi_router.urls),
     # For anything not caught by a more specific rule above, hand over to
     # Wagtail's page serving mechanism. This should be the last pattern in
     # the list:

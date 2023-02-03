@@ -4,6 +4,7 @@ from wagtail import blocks
 from wagtail.admin.edit_handlers import ObjectList, TabbedInterface
 from wagtail.admin.panels import MultiFieldPanel, FieldPanel, FieldRowPanel, InlinePanel
 from wagtail.admin.widgets import SwitchInput
+from wagtail.api import APIField
 from wagtail.core.models import Page
 from wagtail.fields import StreamField
 from wagtail.images.blocks import ImageChooserBlock
@@ -60,3 +61,7 @@ class SimplePage(Page):
             ),
         ]
     )
+
+    api_fields = [
+        APIField("body"),
+    ]
