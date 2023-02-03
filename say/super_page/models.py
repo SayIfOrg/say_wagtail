@@ -44,16 +44,16 @@ class SimplePage(Page):
         FieldPanel("body"),
     ]
 
-    social_media_panels = [
-        FormableInlinePanel(
-            "page_telegramactions", form=TelegramActionForm, label="Telegram actions"
-        ),
-    ]
+    # social_media_panels = [
+    #     FormableInlinePanel(
+    #         "page_telegramactions", form=TelegramActionForm, label="Telegram actions"
+    #     ),
+    # ]
 
     edit_handler = TabbedInterface(
         [
             ObjectList(content_panels, heading=_("Content")),
-            ObjectList(social_media_panels, heading=_("Social media")),
+            # ObjectList(social_media_panels, heading=_("Social media")),
             ObjectList(Page.promote_panels, heading=_("Promote")),
             ObjectList(
                 Page.settings_panels, heading=_("Settings"), classname="settings"
