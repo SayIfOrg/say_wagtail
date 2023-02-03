@@ -9,3 +9,8 @@ from ._setup import *
 env = environ.Env(
     # DEBUG=(bool, False)
 )
+
+
+# AVAILABLE_STORAGES = [
+#     "first_minio",
+# ]

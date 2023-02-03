@@ -43,6 +43,10 @@ SITE_USER_MODEL = "user_manager.SiteUser"
 PATHS_NEED_SITE = ["^/admin/"]
 
 
+# django-cors-headers #
+
+CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS")
+
 # django-storages #
 
 # Apache libcloud storage provided by django-storages

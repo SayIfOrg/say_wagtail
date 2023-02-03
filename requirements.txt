@@ -4,6 +4,7 @@ Django>=4.1,<4.2
 -e ../../wagtail
 #   #   #   #   #   #   #   #
 apache-libcloud>=3.6,<3.7
+django-cors-headers>=3.13,3.14
 django-environ>=0.9,<1.0
 django-grpc>=1.0,<1.1
 django-htmx>=1.12,<1.13

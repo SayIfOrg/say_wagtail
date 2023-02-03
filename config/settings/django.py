@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "say.user_manager",
     "say.utils",
 
+    "corsheaders",
     "django_browser_reload",
     "django_grpc",
     "tailwind",
@@ -72,6 +73,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
