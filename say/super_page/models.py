@@ -7,6 +7,8 @@ from wagtail.core.models import Page
 from wagtail.fields import StreamField
 from wagtail.images.blocks import ImageChooserBlock
 
+from grapple.models import GraphQLStreamfield
+
 
 class SimplePage(Page):
     body = StreamField(
@@ -40,4 +42,8 @@ class SimplePage(Page):
 
     api_fields = [
         APIField("body"),
+    ]
+
+    graphql_fields = [
+        GraphQLStreamfield("body"),
     ]

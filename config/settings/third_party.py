@@ -104,3 +104,16 @@ GRPCSERVER = {
 
 TAILWIND_APP_NAME = "theme"
 NPM_BIN_PATH = shutil.which("npm")
+
+
+# graphene #
+
+GRAPHENE = {"SCHEMA": "grapple.schema.schema"}
+
+
+# wagtail-grapple #
+
+GRAPPLE = {
+    "APPS": ["home", "super_page"],
+    "EXPOSE_GRAPHIQL": True,
+}

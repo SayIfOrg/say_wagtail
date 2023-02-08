@@ -27,6 +27,7 @@ if settings.DEBUG:
     urlpatterns.append(path("__reload__/", include("django_browser_reload.urls")))
 
 urlpatterns = urlpatterns + [
+    path("", include("grapple.urls")),
     path("api/", wagtailapi_router.urls),
     # For anything not caught by a more specific rule above, hand over to
     # Wagtail's page serving mechanism. This should be the last pattern in

@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     "corsheaders",
     "django_browser_reload",
     "django_grpc",
+    "grapple",
+    "graphene_django",
     "tailwind",
 
     "wagtail",
