@@ -1,7 +1,7 @@
 from django.dispatch import receiver
 from wagtail.blocks import RichTextBlock
-from wagtail.core.signals import page_published
-from wagtail.core.templatetags.wagtailcore_tags import richtext
+from wagtail.signals import page_published
+from wagtail.templatetags.wagtailcore_tags import richtext
 
 import grpc
 from sayif_protos import webpage_pb2_grpc, webpage_pb2
