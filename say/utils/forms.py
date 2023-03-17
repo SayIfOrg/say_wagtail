@@ -27,8 +27,14 @@ class DSWImageForm(BaseImageForm):
                 from say.utils.storage import DynamicLibCloudStorage
 
                 storage = DynamicLibCloudStorage(provider_name="minio-static")
+            # The patchy way to set dynamic storage if the save() method did not get called
             self.instance.file.destination_storage = storage
             return storage
+
+    def save(self, commit=True):
+        # The patchy way to set dynamic storage in case of the too deep object referencing
+        self.instance.file.destination_storage = self.cleaned_data["storage"]
+        return super(DSWImageForm, self).save(commit=commit)
 
 
 class DSWDocumentForm(BaseDocumentForm):
@@ -52,5 +58,11 @@ class DSWDocumentForm(BaseDocumentForm):
                 from say.utils.storage import DynamicLibCloudStorage
 
                 storage = DynamicLibCloudStorage(provider_name="minio-static")
+            # The patchy way to set dynamic storage if the save() method did not get called
             self.instance.file.destination_storage = storage
             return storage
+
+    def save(self, commit=True):
+        # The patchy way to set dynamic storage in case of the too deep object referencing
+        self.instance.file.destination_storage = self.cleaned_data["storage"]
+        return super(DSWDocumentForm, self).save(commit=commit)
