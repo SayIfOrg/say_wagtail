@@ -10,9 +10,6 @@ env = environ.Env(
     # DEBUG=(bool, False)
 )
 
-# Take environment variables from .env file
-environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
-
 
 DEBUG = env.bool("DEBUG", default=False)
 
@@ -29,64 +26,70 @@ CSRF_TRUSTED_ORIGINS = env.list(
 )
 
 
-INSTALLED_APPS = [
-    "say.home",
-    "say.linked_account",
-    "say.search",
-    "say.storage",
-    "say.super_page",
-    "say.theme",
-    "say.user_manager",
-    "say.utils",
+INSTALLED_APPS = clean_ellipsis(
+    [
+        "say.home",
+        "say.linked_account",
+        "say.search",
+        "say.storage",
+        "say.super_page",
+        "say.theme",
+        "say.user_manager",
+        "say.utils",
 
-    "corsheaders",
-    "django_browser_reload",
-    "django_grpc",
-    "grapple",
-    "graphene_django",
-    "tailwind",
+        "corsheaders",
+        "django_browser_reload" if PLUGGABLE_FUNCS.BROWSER_RELOAD else ...,
+        "django_grpc",
+        "grapple",
+        "graphene_django",
+        "tailwind",
 
-    "wagtail",
-    "wagtail.admin",
-    "wagtail.api.v2",
-    "wagtail.contrib.forms",
-    "wagtail.contrib.redirects",
-    "wagtail.contrib.settings",
-    "wagtail.contrib.modeladmin",
-    "wagtail.documents",
-    "wagtail.embeds",
-    "wagtail.images",
-    "wagtail.search",
-    "wagtail.sites",
-    "wagtail.snippets",
-    "wagtail.users",
+        "wagtail",
+        "wagtail.admin",
+        "wagtail.api.v2",
+        "wagtail.contrib.forms",
+        "wagtail.contrib.redirects",
+        "wagtail.contrib.settings",
+        "wagtail.contrib.modeladmin",
+        "wagtail.documents",
+        "wagtail.embeds",
+        "wagtail.images",
+        "wagtail.search",
+        "wagtail.sites",
+        "wagtail.snippets",
+        "wagtail.users",
 
-    "modelcluster",
-    "rest_framework",
-    "taggit",
+        "modelcluster",
+        "rest_framework",
+        "taggit",
 
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.messages",
-    "django.contrib.sessions",
-    "django.contrib.staticfiles",
-]
+        "django.contrib.admin",
+        "django.contrib.auth",
+        "django.contrib.contenttypes",
+        "django.contrib.messages",
+        "django.contrib.sessions",
+        "django.contrib.staticfiles",
+    ]
+)
 
-MIDDLEWARE = [
-    "django.contrib.sessions.middleware.SessionMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
-    "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "django.middleware.security.SecurityMiddleware",
-    "wagtail.contrib.redirects.middleware.RedirectMiddleware",
-    "wagtail.sites.middleware.SiteUserMiddleware",
-    "django_htmx.middleware.HtmxMiddleware",
-    "django_browser_reload.middleware.BrowserReloadMiddleware",
-]
+MIDDLEWARE = clean_ellipsis(
+    [
+        "django.contrib.sessions.middleware.SessionMiddleware",
+        "corsheaders.middleware.CorsMiddleware",
+        "django.middleware.common.CommonMiddleware",
+        "django.middleware.csrf.CsrfViewMiddleware",
+        "django.contrib.auth.middleware.AuthenticationMiddleware",
+        "django.contrib.messages.middleware.MessageMiddleware",
+        "django.middleware.clickjacking.XFrameOptionsMiddleware",
+        "django.middleware.security.SecurityMiddleware",
+        "wagtail.contrib.redirects.middleware.RedirectMiddleware",
+        "wagtail.sites.middleware.SiteUserMiddleware",
+        "django_htmx.middleware.HtmxMiddleware",
+        "django_browser_reload.middleware.BrowserReloadMiddleware"
+        if PLUGGABLE_FUNCS.BROWSER_RELOAD
+        else ...,
+    ]
+)
 
 ROOT_URLCONF = "config.urls"
 
@@ -135,21 +138,24 @@ AUTHENTICATION_BACKENDS = [
 
 AUTH_USER_MODEL = "user_manager.User"
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
-]
-AUTH_PASSWORD_VALIDATORS = []
+AUTH_PASSWORD_VALIDATORS = (
+    [
+        {
+            "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        },
+        {
+            "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        },
+        {
+            "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+        },
+        {
+            "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+        },
+    ]
+    if ~PLUGGABLE_FUNCS.NO_PASS_VALIDATION
+    else []
+)
 
 
 # Internationalization
