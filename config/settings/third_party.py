@@ -102,7 +102,7 @@ GRPCSERVER = {
 
 # django-tailwind #
 
-TAILWIND_APP_NAME = "theme"
+TAILWIND_APP_NAME = "say.theme"
 NPM_BIN_PATH = shutil.which("npm")
 
 
