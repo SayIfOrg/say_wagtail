@@ -19,5 +19,8 @@ pydantic>=1.10,1.11
 #-e "git+https://github.com/SayIfOrg/say_protos.git#egg=sayif_protos&subdirectory=packages/python"
 -e ../say_protos/packages/python
 #   #   #   #
-wagtail_grapple>=0.19,<0.20
+# wagtail-grapple(engAmirEng modification) #
+#git+https://github.com/engAmirEng/wagtail-grapple.git@bug-fix
+-e ../../my-wagtail-grapple
+#   #   #   #   #   #   #   #
 whitenoise>=6.2,<7.0

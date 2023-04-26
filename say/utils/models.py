@@ -2,6 +2,7 @@ from contextlib import contextmanager
 
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from grapple.models import GraphQLString, GraphQLImage, GraphQLInt
 from wagtail.documents import models as wagtail_document_models
 from wagtail.images import models as wagtail_image_models
 from wagtail.images.models import (
@@ -100,6 +101,16 @@ class DSWRendition(Monkey, wagtail_image_models.AbstractRendition):
 
     class Meta(wagtail_image_models.AbstractImage.Meta):
         unique_together = (("image", "filter_spec", "focal_point_key"),)
+
+    graphql_fields = (
+        GraphQLString("custom_rendition_property", required=True),
+        GraphQLInt("id", required=True),
+        GraphQLString("url", required=True),
+        GraphQLString("width", required=True),
+        GraphQLString("height", required=True),
+        GraphQLImage("image", required=True),
+        GraphQLString("file", required=True),
+    )
 
 
 class DSWAbstractDocument(wagtail_document_models.AbstractDocument):

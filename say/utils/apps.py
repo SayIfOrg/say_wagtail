@@ -16,4 +16,4 @@ class UtilsConfig(AppConfig):
 
         ImageModel = get_image_model()
         register_image_model(ImageModel, "")
-        # register_image_rendition_model(ImageModel.get_rendition_model(), "") wagtail-grapple Issue #311
+        register_image_rendition_model(ImageModel.get_rendition_model(), "") #wagtail-grapple Issue #311
