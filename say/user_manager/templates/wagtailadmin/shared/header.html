@@ -1,5 +1,6 @@
 {% comment %}
-    Just needed to add current project selector to the header.
+List of overwrites:
+    - Just needed to add current project selector to the header.
 {% endcomment %}
 
 {% load i18n wagtailadmin_tags %}
@@ -18,14 +19,19 @@
     - `merged` - if true, add the classname 'merged'
     - `action_url` - if present, display an 'action' button. This is the URL to be used as the link URL for the button
     - `action_text` - text for the 'action' button
-    - `action_icon` - icon for the 'action' button, default is 'icon-plus'
+    - `action_icon` - icon for the 'action' button, default is 'plus'
     - `extra_actions` - extra action buttons for the header. This is the HTML to be used for the extra buttons
+    - `breadcrumb` - Custom breadcrumbs content as a variable, displayed in place of breadcrumb block before the header content
+    - `header` - Replaces the header `h1` completely with custom variable content
+    - `search` - An alternative search content variable displayed if provided and search_url url is not present
+    - `extra_rows` - Shown at the end of the header container
 
 {% endcomment %}
 <header class="{% classnames "w-header" classname merged|yesno:"w-header--merged," search_form|yesno:"w-header--hasform," %}">
-    {% block breadcrumb %}{% endblock %}
+    {% block breadcrumb %}{{ breadcrumb }}{% endblock %}
     <div class="row">
         <div class="left">
+        {% comment %}this part is added{% endcomment %}
             <div class="col">
                 <button hx-get="{% url 'project_list' %}" hx-trigger="click once" hx-target="#project-list-container" hx-swap="innerHTML"
                         data-dropdown-toggle="dropdown-states" class="z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-500 bg-gray-100 border border-gray-300 rounded-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">
@@ -37,26 +43,33 @@
                     </ul>
                 </div>
             </div>
+        {% comment %}this part is added{% endcomment %}
             <div class="col">
-                <h1 class="w-header__title" id="header-title">
-                    {% if icon %}
-                        {% icon class_name="w-header__glyph" name=icon %}
-                    {% elif avatar %}
-                        <div class="w-header__glyph avatar"><img src="{{ avatar }}" alt="" /></div>
-                    {% endif %}
-                    {{ title }}{% if subtitle %} <span class="w-header__subtitle">{{ subtitle }}</span>{% endif %}
-                </h1>
+                {% if heading %}
+                    {{ heading }}
+                {% else %}
+                    <h1 class="w-header__title" id="header-title">
+                        {% if icon %}
+                            {% icon classname="w-header__glyph" name=icon %}
+                        {% elif avatar %}
+                            <div class="w-header__glyph avatar large"><img src="{{ avatar }}" alt="" /></div>
+                        {% endif %}
+                        {{ title }}{% if subtitle %} <span class="w-header__subtitle">{{ subtitle }}</span>{% endif %}
+                    </h1>
+                {% endif %}
                 {% if description %}<div class="w-header__description">{{ description }}</div>{% endif %}
             </div>
             {% if search_url %}
                 <form class="col search-form" action="{% url search_url %}{% if query_parameters %}?{{ query_parameters }}{% endif %}" method="get" novalidate role="search">
                     {% for field in search_form %}
-                        {% include "wagtailadmin/shared/field.html" with field=field classname="w-mb-0" sr_only_label=True icon="search" %}
+                        {% include "wagtailadmin/shared/field.html" with field=field classname="w-mb-0 -w-mt-2.5" sr_only_label=True icon="search" %}
                     {% endfor %}
                     {% comment %}Add an initial disabled & hidden submit button so that pressing 'enter' will not submit form. Reload not required as the content is dynamically loaded.{% endcomment %}
                     <div class="visuallyhidden"><input disabled type="submit" aria-hidden="true"/></div>
                     <div class="submit visuallyhidden"><input type="submit" value="Search" class="button" /></div>
                 </form>
+            {% elif search %}
+                {{ search }}
             {% endif %}
         </div>
         <div class="{% block right_column_classname %}right{% endblock %}">
@@ -74,5 +87,5 @@
             {% endif %}
         </div>
     </div>
-    {% block extra_rows %}{% endblock %}
+    {% block extra_rows %}{{ extra_rows }}{% endblock %}
 </header>
