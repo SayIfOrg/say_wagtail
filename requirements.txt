@@ -4,7 +4,7 @@ Django>=4.1,<4.2
 -e ../../wagtail
 #   #   #   #   #   #   #   #
 apache-libcloud>=3.6,<3.7
-django-cors-headers>=3.13,3.14
+django-cors-headers>=3.13,<3.14
 django-environ>=0.9,<1.0
 django-grpc>=1.0,<1.1
 django-htmx>=1.12,<1.13
@@ -14,7 +14,7 @@ grpcio>=1.50,<1.51
 grpcio-tools>=1.50,<1.51
 minio>=7.1,<7.2
 psycopg2-binary>=2.9,<2.10
-pydantic>=1.10,1.11
+pydantic>=1.10,<1.11
 # say_protos #
 #-e "git+https://github.com/SayIfOrg/say_protos.git#egg=sayif_protos&subdirectory=packages/python"
 -e ../say_protos/packages/python
