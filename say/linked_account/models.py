@@ -9,7 +9,7 @@ from wagtail.admin.widgets import SwitchInput
 from wagtail.models import Orderable
 from wagtail.snippets.models import register_snippet
 
-from sayif_protos import webpage_pb2_grpc, webpage_pb2
+from say_protos import webpage_pb2_grpc, webpage_pb2
 
 from say.linked_account.views import telegram_instance_chooser_viewset
 

@@ -1,21 +1,21 @@
-Django>=4.1,<4.2
-# wagtail(sayif modification), uncomment when it's commented in requirements_local.txt
-#-e git+https://github.com/engAmirEng/wagtail.git@say-if/features/multi-tenancy#egg=wagtail
-#   #   #   #   #   #   #   #
+Django>=4.2,<4.3
+# wagtail(engAmirEng, multitenancy & build statics on pip install)
+git+https://github.com/engAmirEng/wagtail.git@140aa666a6577d63cf82b
 apache-libcloud>=3.6,<3.7
 django-cors-headers>=3.13,<3.14
 django-environ>=0.9,<1.0
 django-grpc>=1.0,<1.1
 django-htmx>=1.12,<1.13
-django-storages>=1.13,<1.14
+# django-storages
+git+https://github.com/jschneier/django-storages.git@72638483b17459577f17e151bb8a
 django-tailwind>=3.4,<3.5
 grpcio>=1.50,<1.51
 grpcio-tools>=1.50,<1.51
 minio>=7.1,<7.2
 psycopg2-binary>=2.9,<2.10
 pydantic>=1.10,<1.11
-# say_protos, uncomment when it's commented in requirements_local.txt
-#-e "git+https://github.com/SayIfOrg/say_protos.git#egg=sayif_protos&subdirectory=packages/python"
-# wagtail-grapple(engAmirEng modification), uncomment when it's commented in requirements_local.txt
-#git+https://github.com/engAmirEng/wagtail-grapple.git@bug-fix
+# say_protos
+git+https://github.com/SayIfOrg/say_protos.git@cd7f74268a6#subdirectory=packages/python
+# wagtail-grapple(engAmirEng modification)
+git+https://github.com/engAmirEng/wagtail-grapple.git@429bd6fc118138b
 whitenoise>=6.2,<7.0
