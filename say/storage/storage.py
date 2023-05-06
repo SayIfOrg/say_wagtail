@@ -1,10 +1,9 @@
 from __future__ import annotations
-from abc import ABC, abstractmethod
+from abc import abstractmethod
 from typing import Optional
 
 from django.core.exceptions import (
     ImproperlyConfigured,
-    ValidationError as DJValidationError,
 )
 from django.core.files.storage import Storage
 from django.utils.deconstruct import deconstructible
@@ -19,7 +18,7 @@ class StorageDoesNotExists(Exception):
     pass
 
 
-class AccountStorageMixin(DynamicStorageMixin, ABC):
+class AccountStorageMixin(DynamicStorageMixin):
     IDENTITY: str
     Schema: BaseModel
 
@@ -47,10 +46,11 @@ class AccountStorageMixin(DynamicStorageMixin, ABC):
 
     @classmethod
     def validate_to_obj_args(cls, args: dict) -> BaseModel:
-        try:
-            return cls.Schema(**args)
-        except ValidationError as e:
-            raise DJValidationError(str(e))
+        """
+        returns the final ready to be passed to Storage result
+        raises ValidationError if not valid
+        """
+        return cls.Schema(**args)
 
     @property
     def storage_account_id(self):

@@ -53,4 +53,5 @@ class StorageAccountAdmin(ModelAdmin):
     edit_view_class = StorageAccountEditView
 
     def get_edit_handler(self, instance=None, request=None):
+        # to make sure all edit handlers are defined explicitly in view classes
         raise ValueError("Make sure using view specific edit handler")

@@ -1,3 +1,4 @@
+import pydantic
 from django.core.checks import register, Critical
 from django.core.exceptions import ValidationError, ImproperlyConfigured
 from django.db import models
@@ -9,6 +10,7 @@ from .storage import (
     get_storage_by_identity,
     AccountStorage,
 )
+from .utils import pydantic_validation_err_to_djs
 
 AVAILABLE_STORAGES = [
     MinioAccountStorage,
@@ -45,19 +47,30 @@ class StorageAccount(models.Model):
     title = models.CharField(max_length=127)
     args = models.JSONField(default=dict)
 
+    def __init__(self, *args, **kwargs):
+        super(StorageAccount, self).__init__(*args, **kwargs)
+        self.validate_schema_before_saving = True
+
     def get_storage_class(self) -> AccountStorage.__class__:
         return get_storage_by_identity(self.type)
 
     def get_storage(self) -> AccountStorage:
         return self.get_storage_class()(storage_account=self)
 
-    def check_args(self):
-        SelectedStorage = get_storage_by_identity(self.type)
-        self.args = SelectedStorage.validate_to_obj_args(self.args).dict()
+    @classmethod
+    def validate_schema(cls, storage: AccountStorage.__class__, args: dict):
+        """
+        returns the final dict ready to be passed to Storage
+        raises ValidationError if not valid
+        """
+        try:
+            return storage.validate_to_obj_args(args).dict()
+        except pydantic.ValidationError as e:
+            raise pydantic_validation_err_to_djs(e)
 
     def save(self, *args, **kwargs):
-        try:
-            self.check_args()
-        except ValidationError:
-            raise
+        if self.validate_schema_before_saving:
+            self.args = self.validate_schema(
+                storage=self.get_storage_class(), args=self.args
+            )
         return super(StorageAccount, self).save(*args, **kwargs)
