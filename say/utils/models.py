@@ -9,9 +9,15 @@ from wagtail.images.models import (
     SourceImageIOError,
     get_rendition_upload_to,
     get_rendition_storage,
+    WagtailImageField,
+    WagtailImageFieldFile,
 )
 
-from say.dynamic_storage.models import DynamicImageField, DynamicFileField
+from say.dynamic_storage.models import (
+    DynamicImageField,
+    DynamicFileField,
+    DynamicImageFieldFile,
+)
 
 
 class Monkey:
@@ -58,10 +64,18 @@ class Monkey:
                 image_file.close()
 
 
+class DynamicWagtailImageFieldFile(WagtailImageFieldFile, DynamicImageFieldFile):
+    pass
+
+
+class DynamicWagtailImageField(WagtailImageField, DynamicImageField):
+    attr_class = DynamicWagtailImageFieldFile
+
+
 class DSWAbstractImage(Monkey, wagtail_image_models.AbstractImage):
     """Dynamic Storage Wagtail Abstract Image"""
 
-    file = DynamicImageField(
+    file = DynamicWagtailImageField(
         verbose_name=_("file"),
         upload_to=wagtail_image_models.get_upload_to,
         width_field="width",
@@ -88,7 +102,7 @@ class DSWImage(DSWAbstractImage):
 class DSWRendition(Monkey, wagtail_image_models.AbstractRendition):
     """Dynamic Storage Wagtail Rendition"""
 
-    file = DynamicImageField(
+    file = DynamicWagtailImageField(
         upload_to=get_rendition_upload_to,
         storage=get_rendition_storage,
         width_field="width",
