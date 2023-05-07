@@ -3,6 +3,7 @@ Django>=4.2,<4.3
 git+https://github.com/engAmirEng/wagtail.git@140aa666a6577d63cf82b
 apache-libcloud>=3.6,<3.7
 django-cors-headers>=3.13,<3.14
+django-debug-toolbar>=4.0,<4.1
 django-environ>=0.9,<1.0
 django-grpc>=1.0,<1.1
 django-htmx>=1.12,<1.13

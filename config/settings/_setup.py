@@ -27,7 +27,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 
 # Define pluggable functionalities
-pluggable_available = ["BROWSER_RELOAD", "NO_PASS_VALIDATION"]
+pluggable_available = ["BROWSER_RELOAD", "NO_PASS_VALIDATION", "DEBUG_TOOLBAR"]
 pluggable_enabled = env.list("PLUGGABLES")
 for p in pluggable_enabled:
     if p not in pluggable_available:
@@ -37,3 +37,4 @@ for p in pluggable_enabled:
 class PLUGGABLE_FUNCS:
     BROWSER_RELOAD = "BROWSER_RELOAD" in pluggable_enabled
     NO_PASS_VALIDATION = "NO_PASS_VALIDATION" in pluggable_enabled
+    DEBUG_TOOLBAR = "DEBUG_TOOLBAR" in pluggable_enabled

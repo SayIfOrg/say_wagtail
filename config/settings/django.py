@@ -38,6 +38,7 @@ INSTALLED_APPS = clean_ellipsis(
         "say.utils",
 
         "corsheaders",
+        "debug_toolbar" if PLUGGABLE_FUNCS.DEBUG_TOOLBAR else ...,
         "django_browser_reload" if PLUGGABLE_FUNCS.BROWSER_RELOAD else ...,
         "django_grpc",
         "grapple",
@@ -74,6 +75,9 @@ INSTALLED_APPS = clean_ellipsis(
 
 MIDDLEWARE = clean_ellipsis(
     [
+        "debug_toolbar.middleware.DebugToolbarMiddleware"
+        if PLUGGABLE_FUNCS.DEBUG_TOOLBAR
+        else ...,
         "django.contrib.sessions.middleware.SessionMiddleware",
         "corsheaders.middleware.CorsMiddleware",
         "django.middleware.common.CommonMiddleware",

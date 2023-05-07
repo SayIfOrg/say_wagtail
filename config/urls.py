@@ -27,6 +27,11 @@ if settings.DEBUG:
 if settings.PLUGGABLE_FUNCS.BROWSER_RELOAD:
     urlpatterns.append(path("__reload__/", include("django_browser_reload.urls")))
 
+if settings.PLUGGABLE_FUNCS.DEBUG_TOOLBAR:
+    urlpatterns.append(
+        path("__debug__/", include("debug_toolbar.urls")),
+    )
+
 urlpatterns = urlpatterns + [
     path("", include("grapple.urls")),
     path("api/", wagtailapi_router.urls),
