@@ -3,6 +3,7 @@ from django.core.checks import register, Critical
 from django.core.exceptions import ValidationError, ImproperlyConfigured
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from wagtail.models import Site
 
 from .storage import (
     MinioAccountStorage,
@@ -41,7 +42,16 @@ def available_storage_validator(value: str):
         raise ValidationError(_("This storage is not available."))
 
 
+class StorageAccountQuerySet(models.QuerySet):
+    def for_site(self, site: Site):
+        return self.filter(site=site)
+
+
 class StorageAccount(models.Model):
+    IN_SITE_METHOD = "for_site"
+    PROVIDE_SITE_METHOD = "set_site"
+    objects = StorageAccountQuerySet.as_manager()
+
     site = models.ForeignKey("wagtailcore.Site", on_delete=models.CASCADE)
     type = models.CharField(max_length=63, validators=[available_storage_validator])
     title = models.CharField(max_length=127)
@@ -50,6 +60,9 @@ class StorageAccount(models.Model):
     def __init__(self, *args, **kwargs):
         super(StorageAccount, self).__init__(*args, **kwargs)
         self.validate_schema_before_saving = True
+
+    def set_site(self, site):
+        self.site_id = site.id
 
     def get_storage_class(self) -> AccountStorage.__class__:
         return get_storage_by_identity(self.type)

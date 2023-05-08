@@ -1,5 +1,6 @@
 from django.contrib.auth.models import (
     AbstractUser,
+    UserManager as BaseUserManager,
 )
 from django.db import models
 from wagtail.contrib.settings.models import BaseSiteSetting
@@ -20,7 +21,20 @@ class SiteUser(AbstractSiteUser):
     pass
 
 
+class UserQuerySet(models.QuerySet):
+    def for_site(self, site: Site):
+        return self.filter(user_siteusers__site=site)
+
+
+class UserManager(BaseUserManager):
+    def get_queryset(self):
+        return UserQuerySet(self.model, using=self._db)
+
+
 class User(SitePermissionsMonkeyPatchMixin, AbstractUser):
+    IN_SITE_METHOD = "for_site"
+    objects = UserManager()
+
     def __init__(self, *args, **kwargs):
         super(User, self).__init__(*args, **kwargs)
         self.site_user: SiteUser

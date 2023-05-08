@@ -26,10 +26,6 @@ class StorageAccountCreateView(CreateView):
         )
         return edit_handler.bind_to_model(self.model_admin.model)
 
-    def form_valid(self, form):
-        form.instance.site = self.request.user.site_user.site
-        return super(StorageAccountCreateView, self).form_valid(form)
-
 
 class StorageAccountEditView(EditView):
     def get_edit_handler(self):

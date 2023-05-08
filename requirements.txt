@@ -1,6 +1,6 @@
 Django>=4.2,<4.3
 # wagtail(engAmirEng, multitenancy & build statics on pip install)
-git+https://github.com/engAmirEng/wagtail.git@140aa666a6577d63cf82b
+git+https://github.com/engAmirEng/wagtail.git@2c9350564089ecc84287e29
 apache-libcloud>=3.6,<3.7
 django-cors-headers>=3.13,<3.14
 django-debug-toolbar>=4.0,<4.1
