@@ -33,7 +33,6 @@ INSTALLED_APPS = clean_ellipsis(
         "say.search",
         "say.storage",
         "say.super_page",
-        "say.theme",
         "say.user_manager",
         "say.utils",
 
@@ -44,7 +43,6 @@ INSTALLED_APPS = clean_ellipsis(
         "django_vite",
         "grapple",
         "graphene_django",
-        "tailwind",
 
         "wagtail",
         "wagtail.admin",

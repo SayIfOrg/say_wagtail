@@ -9,7 +9,6 @@ django-grpc>=1.0,<1.1
 django-htmx>=1.12,<1.13
 # django-storages
 git+https://github.com/jschneier/django-storages.git@72638483b17459577f17e151bb8a
-django-tailwind>=3.4,<3.5
 django-vite>=2.0.2,<2.1
 grpcio>=1.50,<1.51
 grpcio-tools>=1.50,<1.51

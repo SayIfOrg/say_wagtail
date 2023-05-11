@@ -31,30 +31,30 @@ List of overwrites:
     {% block breadcrumb %}{{ breadcrumb }}{% endblock %}
     <div class="row">
         <div class="left">
-        {% comment %}this part is added{% endcomment %}
-            <div class="col">
-                <button hx-get="{% url 'project_list' %}" hx-trigger="click once" hx-target="#project-list-container" hx-swap="innerHTML"
-                        data-dropdown-toggle="dropdown-states" class="z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-500 bg-gray-100 border border-gray-300 rounded-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">
-                    <img style="width: 50px; height: 50px" src="http://localhost:9000/test/images/898407.max-165x165.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=7ckdBbqDfadqjEYP%2F20221108%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20221108T131653Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=2d8bc9f7f094dd851eeed9c4a29e24e19126a2b74e10581dc9df7a4a37d40d75">
-                    {{ request.user.project_user.project }} <svg aria-hidden="true" class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                </button>
-                <div id="dropdown-states" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 9.77778px, 0px);">
-                    <ul id="project-list-container" class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="states-button">
-                    </ul>
-                </div>
-            </div>
-        {% comment %}this part is added{% endcomment %}
             <div class="col">
                 {% if heading %}
                     {{ heading }}
                 {% else %}
-                    <h1 class="w-header__title" id="header-title">
+                    {% comment %}`flex flex-col md:flex-row` are added{% endcomment %}
+                    <h1 class="w-header__title flex flex-col md:flex-row" id="header-title">
                         {% if icon %}
                             {% icon classname="w-header__glyph" name=icon %}
                         {% elif avatar %}
                             <div class="w-header__glyph avatar large"><img src="{{ avatar }}" alt="" /></div>
                         {% endif %}
                         {{ title }}{% if subtitle %} <span class="w-header__subtitle">{{ subtitle }}</span>{% endif %}
+                    {% comment %}this part is added{% endcomment %}
+                        <div class="md:mx-6 mx-0">
+                            <button hx-get="{% url 'project_list' %}" hx-trigger="click once" hx-target="#project-list-container" hx-swap="innerHTML"
+                                    data-dropdown-toggle="dropdown-states" class="z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-500 bg-gray-100 border border-gray-300 rounded-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">
+                                {{ request.user.site_user.site.site_name }}
+                            </button>
+                            <div id="dropdown-states" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 9.77778px, 0px);">
+                                <ul id="project-list-container" class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="states-button">
+                                </ul>
+                            </div>
+                        </div>
+                    {% comment %}this part is added{% endcomment %}
                     </h1>
                 {% endif %}
                 {% if description %}<div class="w-header__description">{{ description }}</div>{% endif %}
