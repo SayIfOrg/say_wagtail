@@ -100,12 +100,6 @@ GRPCSERVER = {
 }
 
 
-# django-tailwind #
-
-TAILWIND_APP_NAME = "say.theme"
-NPM_BIN_PATH = shutil.which("npm")
-
-
 # graphene #
 
 GRAPHENE = {"SCHEMA": "grapple.schema.schema"}
@@ -117,3 +111,10 @@ GRAPPLE = {
     "APPS": ["home", "super_page"],
     "EXPOSE_GRAPHIQL": True,
 }
+
+
+# django-vite #
+
+DJANGO_VITE_ASSETS_PATH = os.path.join(BASE_DIR, "say", "static_dist")
+DJANGO_VITE_DEV_MODE = env.bool("DJANGO_VITE_DEV_MODE")
+DJANGO_VITE_DEV_SERVER_PORT = 8001

@@ -26,6 +26,10 @@ ENV/
 env.bak/
 venv.bak/
 
+### JS ###
+node_modules
+static_dist
+
 ### Pycharm ###
 .idea
 
