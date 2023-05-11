@@ -41,6 +41,7 @@ INSTALLED_APPS = clean_ellipsis(
         "debug_toolbar" if PLUGGABLE_FUNCS.DEBUG_TOOLBAR else ...,
         "django_browser_reload" if PLUGGABLE_FUNCS.BROWSER_RELOAD else ...,
         "django_grpc",
+        "django_vite",
         "grapple",
         "graphene_django",
         "tailwind",
@@ -182,6 +183,7 @@ STATICFILES_FINDERS = [
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "say", "static"),
+    os.path.join(BASE_DIR, "say", "static_dist"),
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
