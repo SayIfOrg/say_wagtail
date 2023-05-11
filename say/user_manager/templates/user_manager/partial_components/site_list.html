@@ -1,0 +1,10 @@
+{% for i in object_list %}
+    <li>
+        <button type="button" hx-get="{% url 'set_workon_site' i.pk %}"
+                class="inline-flex py-2 px-4 w-full text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
+            <div class="inline-flex items-center">
+                @{{ i.sitename }}
+            </div>
+        </button>
+    </li>
+{% endfor %}

@@ -46,9 +46,9 @@ List of overwrites:
                         {{ title }}{% if subtitle %} <span class="w-header__subtitle">{{ subtitle }}</span>{% endif %}
                     {% comment %}this part is added{% endcomment %}
                         <div class="md:mx-6 mx-0">
-                            <button hx-get="{% url 'project_list' %}" hx-trigger="click once" hx-target="#project-list-container" hx-swap="innerHTML"
+                            <button hx-get="{% url 'site_chooser_list' %}" hx-trigger="click once" hx-target="#project-list-container" hx-swap="innerHTML"
                                     data-dropdown-toggle="dropdown-states" class="z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-500 bg-gray-100 border border-gray-300 rounded-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">
-                                {{ request.user.site_user.site.site_name }}
+                                @{{ request.user.site_user.site.sitename }}
                             </button>
                             <div id="dropdown-states" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 9.77778px, 0px);">
                                 <ul id="project-list-container" class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="states-button">
