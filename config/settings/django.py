@@ -85,7 +85,7 @@ MIDDLEWARE = clean_ellipsis(
         "django.contrib.messages.middleware.MessageMiddleware",
         "django.middleware.clickjacking.XFrameOptionsMiddleware",
         "django.middleware.security.SecurityMiddleware",
-        "wagtail.contrib.redirects.middleware.RedirectMiddleware",
+        # "wagtail.contrib.redirects.middleware.RedirectMiddleware",
         "wagtail.sites.middleware.SiteUserMiddleware",
         "django_htmx.middleware.HtmxMiddleware",
         "django_browser_reload.middleware.BrowserReloadMiddleware"
