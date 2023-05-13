@@ -156,7 +156,7 @@ AUTH_PASSWORD_VALIDATORS = (
             "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
         },
     ]
-    if ~PLUGGABLE_FUNCS.NO_PASS_VALIDATION
+    if not PLUGGABLE_FUNCS.NO_PASS_VALIDATION
     else []
 )
 
