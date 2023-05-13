@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         ("wagtailcore", "0081_alter_collectionviewrestriction_groups_and_more"),
         ("taggit", "0005_auto_20220424_2025"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ("utils", "0002_alter_dswrendition_file"),
+        ("core", "0002_alter_dswrendition_file"),
     ]
 
     operations = [

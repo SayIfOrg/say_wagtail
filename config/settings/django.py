@@ -34,7 +34,7 @@ INSTALLED_APPS = clean_ellipsis(
         "say.storage",
         "say.super_page",
         "say.accounting",
-        "say.utils",
+        "say.core",
 
         "corsheaders",
         "debug_toolbar" if PLUGGABLE_FUNCS.DEBUG_TOOLBAR else ...,
@@ -200,4 +200,4 @@ MEDIA_URL = "/media/"
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
 
-DEFAULT_FILE_STORAGE = "say.utils.storage.DynamicLibCloudStorage"
+DEFAULT_FILE_STORAGE = "say.core.storage.DynamicLibCloudStorage"

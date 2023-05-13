@@ -16,11 +16,11 @@ env = environ.Env(
 
 WAGTAIL_SITE_NAME = "say_wagtail"
 
-WAGTAILIMAGES_IMAGE_MODEL = "utils.DSWImage"
-WAGTAILIMAGES_IMAGE_FORM_BASE = "say.utils.forms.DSWImageForm"
+WAGTAILIMAGES_IMAGE_MODEL = "core.DSWImage"
+WAGTAILIMAGES_IMAGE_FORM_BASE = "say.core.forms.DSWImageForm"
 
-WAGTAILDOCS_DOCUMENT_MODEL = "utils.DSWDocument"
-WAGTAILDOCS_DOCUMENT_FORM_BASE = "say.utils.forms.DSWDocumentForm"
+WAGTAILDOCS_DOCUMENT_MODEL = "core.DSWDocument"
+WAGTAILDOCS_DOCUMENT_FORM_BASE = "say.core.forms.DSWDocumentForm"
 
 
 # Search

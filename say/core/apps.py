@@ -3,7 +3,7 @@ from django.apps import AppConfig
 
 class UtilsConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "say.utils"
+    name = "say.core"
 
     def ready(self):
         # Register django signals

@@ -24,7 +24,7 @@ class DSWImageForm(BaseImageForm):
                     pk=storage_account_id
                 ).get_storage()
             else:
-                from say.utils.storage import DynamicLibCloudStorage
+                from say.core.storage import DynamicLibCloudStorage
 
                 storage = DynamicLibCloudStorage(provider_name="minio-static")
             # The patchy way to set dynamic storage if the save() method did not get called
@@ -55,7 +55,7 @@ class DSWDocumentForm(BaseDocumentForm):
                     pk=storage_account_id
                 ).get_storage()
             else:
-                from say.utils.storage import DynamicLibCloudStorage
+                from say.core.storage import DynamicLibCloudStorage
 
                 storage = DynamicLibCloudStorage(provider_name="minio-static")
             # The patchy way to set dynamic storage if the save() method did not get called

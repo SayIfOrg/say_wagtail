@@ -9,7 +9,7 @@ import say.dynamic_storage.models
 
 
 def delete_all_renditions(apps, schema_editor):
-    DSWRendition = apps.get_model("utils", "DSWRendition")
+    DSWRendition = apps.get_model("core", "DSWRendition")
     DSWRendition._default_manager.all().delete()
 
 
@@ -20,7 +20,7 @@ def do_nothing(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("utils", "0001_dsws"),
+        ("core", "0001_dsws"),
     ]
 
     operations = [

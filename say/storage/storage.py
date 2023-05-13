@@ -11,7 +11,7 @@ from django.utils.deconstruct import deconstructible
 from pydantic import BaseModel, conint, constr, ValidationError
 
 from say.dynamic_storage.storage import DynamicStorageMixin
-from say.utils.storage import MinioStorage
+from say.core.storage import MinioStorage
 
 
 class StorageDoesNotExists(Exception):
