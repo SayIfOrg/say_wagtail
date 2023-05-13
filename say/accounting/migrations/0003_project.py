@@ -8,7 +8,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ("wagtailcore", "0081_alter_collectionviewrestriction_groups_and_more"),
-        ("user_manager", "0002_siteuser_siteuser_unique_site_user"),
+        ("accounting", "0002_siteuser_siteuser_unique_site_user"),
     ]
 
     operations = [

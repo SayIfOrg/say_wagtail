@@ -14,7 +14,7 @@ class SiteChooserView(ListView):
 
     def get_template_names(self):
         if self.request.htmx or self.request.GET.get("htmx"):
-            return "user_manager/partial_components/site_list.html"
+            return "accounting/partial_components/site_list.html"
         raise Http404()
 
     def get_queryset(self):

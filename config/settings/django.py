@@ -33,7 +33,7 @@ INSTALLED_APPS = clean_ellipsis(
         "say.search",
         "say.storage",
         "say.super_page",
-        "say.user_manager",
+        "say.accounting",
         "say.utils",
 
         "corsheaders",
@@ -139,7 +139,7 @@ AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
 ]
 
-AUTH_USER_MODEL = "user_manager.User"
+AUTH_USER_MODEL = "accounting.User"
 
 AUTH_PASSWORD_VALIDATORS = (
     [

@@ -38,7 +38,7 @@ WAGTAILADMIN_BASE_URL = "http://example.com"
 
 # engAmirEng/wagtail settings
 
-SITE_USER_MODEL = "user_manager.SiteUser"
+SITE_USER_MODEL = "accounting.SiteUser"
 
 PATHS_NEED_SITE = ["^/admin/"]
 
