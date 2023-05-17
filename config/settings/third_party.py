@@ -108,7 +108,7 @@ GRAPHENE = {"SCHEMA": "grapple.schema.schema"}
 # wagtail-grapple #
 
 GRAPPLE = {
-    "APPS": ["home", "super_page"],
+    "APPS": ["home", "page_types"],
     "EXPOSE_GRAPHIQL": True,
 }
 
