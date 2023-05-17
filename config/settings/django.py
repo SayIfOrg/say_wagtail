@@ -29,7 +29,7 @@ CSRF_TRUSTED_ORIGINS = env.list(
 INSTALLED_APPS = clean_ellipsis(
     [
         "say.home",
-        # "say.linked_account",
+        "say.linked_account",
         "say.page_types",
         "say.search",
         "say.storage",

@@ -31,7 +31,7 @@ class TelegramActionForm(WagtailAdminModelForm):
 class TelegramAction(Orderable):
     base_form_class = TelegramActionForm
     page = ParentalKey(
-        "super_page.SimplePage",
+        "page_types.SimplePage",
         related_name="page_telegramactions",
         on_delete=models.CASCADE,
     )
