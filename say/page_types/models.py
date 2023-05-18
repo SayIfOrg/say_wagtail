@@ -1,4 +1,6 @@
 from django import forms
+from django.db import models
+from django.db.models import OuterRef, Exists
 from django.utils.translation import gettext_lazy as _
 from wagtail import blocks
 from wagtail.admin.panels import (
@@ -12,23 +14,23 @@ from modelcluster.fields import ParentalManyToManyField
 from grapple.models import GraphQLStreamfield, GraphQLPage
 
 
-class ListablePage(Page):
-    max_count = 0
-
+class ListablePageMixin(models.Model):
     listings = ParentalManyToManyField(
         "ListingPage",
-        related_name="listingpage_pages",
+        related_name="listingpage_%(class)ss",
         blank=True,
         help_text=_("A reference to this page appear in witch ListablePages"),
     )
 
+    class Meta:
+        abstract = True
+
     graphql_fields = [
-        GraphQLPage("listingpage_pages", is_list=True),
+        GraphQLPage("listings", is_list=True),
     ]
 
 
-class SimplePage(ListablePage):
-    max_count = None  # set to default
+class SimplePage(Page, ListablePageMixin):
     parent_page_types = ["home.HomePage", "SimplePage"]
 
     body = StreamField(
@@ -48,13 +50,14 @@ class SimplePage(ListablePage):
         ),
     ]
 
-    graphql_fields = [
+    graphql_fields = ListablePageMixin.graphql_fields + [
         GraphQLStreamfield("body"),
-        GraphQLPage("listings", is_list=True),
     ]
 
 
 class ListingPage(Page):
+    parent_page_types = ["home.HomePage", "SimplePage"]
+
     body = StreamField(
         [
             ("editor", blocks.RichTextBlock()),
@@ -65,6 +68,15 @@ class ListingPage(Page):
         FieldPanel("body"),
     ]
 
-    graphql_fields = ListablePage.graphql_fields + [
+    def listingpage_pages(self, info, **kwargs):
+        """
+        Add other types of listables here
+        """
+        simple_page = self.listingpage_simplepages.filter(id__in=OuterRef("pk"))
+        return Page.objects.filter(Exists(simple_page)).specific()
+
+    graphql_fields = [
         GraphQLStreamfield("body"),
+        GraphQLPage("listingpage_simplepages", is_list=True),
+        GraphQLPage("listingpage_pages", is_list=True),
     ]
