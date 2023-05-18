@@ -18,7 +18,6 @@ def do_nothing(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("core", "0001_dsws"),
     ]

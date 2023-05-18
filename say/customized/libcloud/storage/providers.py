@@ -9,7 +9,10 @@ if TYPE_CHECKING:
 
 DRIVERS = {
     **OR_DRIVERS,
-    Provider.MINIO: ("say.customized.libcloud.storage.drivers.minio", "MinIOStorageDriver"),
+    Provider.MINIO: (
+        "say.customized.libcloud.storage.drivers.minio",
+        "MinIOStorageDriver",
+    ),
 }
 
 

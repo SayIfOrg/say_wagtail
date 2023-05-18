@@ -28,6 +28,7 @@ CSRF_TRUSTED_ORIGINS = env.list(
 
 INSTALLED_APPS = clean_ellipsis(
     [
+        # fmt: off
         "say.home",
         "say.linked_account",
         "say.page_types",
@@ -69,6 +70,7 @@ INSTALLED_APPS = clean_ellipsis(
         "django.contrib.messages",
         "django.contrib.sessions",
         "django.contrib.staticfiles",
+        # fmt: on
     ]
 )
 

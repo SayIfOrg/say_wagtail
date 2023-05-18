@@ -6,7 +6,6 @@ import wagtail.images.models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("core", "0003_dswdocument"),
     ]

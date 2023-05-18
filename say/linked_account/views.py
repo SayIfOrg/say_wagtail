@@ -16,7 +16,10 @@ from wagtail.admin.views.generic.chooser import (
 from wagtail.admin.viewsets.chooser import ChooserViewSet
 from wagtail.admin.widgets import BaseChooser
 
-from say.linked_account.components import TelegramInstancePanel, TelegramInstanceCreatePanel
+from say.linked_account.components import (
+    TelegramInstancePanel,
+    TelegramInstanceCreatePanel,
+)
 
 
 @method_decorator(csrf_exempt, name="dispatch")

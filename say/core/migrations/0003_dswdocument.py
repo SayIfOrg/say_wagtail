@@ -10,7 +10,6 @@ import wagtail.search.index
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("wagtailcore", "0081_alter_collectionviewrestriction_groups_and_more"),
         ("taggit", "0005_auto_20220424_2025"),

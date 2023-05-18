@@ -62,7 +62,6 @@ class MinIOStorageDriver(OrMinIOStorageDriver):
     #     pass
 
     def get_object_cdn_url(self, obj, ex_expiry=Minio_CDN_URL_EXPIRY_HOURS):
-
         """
         Return a "presigned URL"
 

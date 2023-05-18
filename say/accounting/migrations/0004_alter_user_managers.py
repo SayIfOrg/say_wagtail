@@ -5,7 +5,6 @@ import say.accounting.models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("accounting", "0003_project"),
     ]

@@ -5,7 +5,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("wagtailcore", "0084_merge_20230305_1030"),
         ("core", "0004_alter_dswimage_file_alter_dswrendition_file"),
