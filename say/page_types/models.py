@@ -7,6 +7,8 @@ from grapple.models import GraphQLStreamfield
 
 
 class SimplePage(Page):
+    parent_page_types = ["home.HomePage", "SimplePage"]
+
     body = StreamField(
         [
             ("editor", blocks.RichTextBlock()),
