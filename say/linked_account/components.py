@@ -1,9 +1,10 @@
-from typing import Mapping, Any
+from typing import Any, Mapping
 
 from django.core.cache import cache
 from django.http import JsonResponse
-from rest_framework import status
 from wagtail.admin.ui.components import Component
+
+from rest_framework import status
 
 
 class TelegramInstancePanel(Component):

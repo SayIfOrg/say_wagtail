@@ -1,17 +1,14 @@
 from django import forms
 from django.db import models
-from django.db.models import OuterRef, Exists
+from django.db.models import Exists, OuterRef
 from django.utils.translation import gettext_lazy as _
 from wagtail import blocks
-from wagtail.admin.panels import (
-    FieldPanel,
-    MultiFieldPanel,
-)
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.fields import StreamField
 from wagtail.models import Page
 
+from grapple.models import GraphQLPage, GraphQLStreamfield
 from modelcluster.fields import ParentalManyToManyField
-from grapple.models import GraphQLStreamfield, GraphQLPage
 
 
 class ListablePageMixin(models.Model):

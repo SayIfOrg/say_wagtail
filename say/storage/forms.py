@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from typing import Mapping, Any, Iterable
+from typing import Any, Iterable, Mapping
 
 from django import forms
 from django.core.exceptions import ImproperlyConfigured, ValidationError
@@ -9,14 +9,10 @@ from django.core.validators import integer_validator
 from django.forms.models import construct_instance
 from django.utils.translation import gettext as _
 from wagtail.admin.forms import WagtailAdminModelForm
-from wagtail.admin.panels import ObjectList, FieldPanel
+from wagtail.admin.panels import FieldPanel, ObjectList
 
-from .storage import (
-    get_storage_by_identity,
-    MinioAccountStorage,
-    Minio2AccountStorage,
-)
-from .models import StorageAccount, AVAILABLE_STORAGES
+from .models import AVAILABLE_STORAGES, StorageAccount
+from .storage import Minio2AccountStorage, MinioAccountStorage, get_storage_by_identity
 
 
 class StorageAccountBaseAdminModelForm(WagtailAdminModelForm):

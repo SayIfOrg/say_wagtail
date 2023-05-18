@@ -1,0 +1,8 @@
+[tool.isort]
+extend_skip = ["migrations", "apps.py"]
+known_apps="say"
+known_first_party="django,wagtail"
+lines_after_imports=2
+profile = "black"
+py_version=39
+sections="FUTURE,STDLIB,FIRSTPARTY,THIRDPARTY,APPS,LOCALFOLDER"

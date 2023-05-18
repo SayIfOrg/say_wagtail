@@ -1,7 +1,7 @@
 from django.urls import path, reverse
 from django.utils.translation import gettext_lazy as _
 from wagtail import hooks
-from wagtail.admin.menu import MenuItem, SubmenuMenuItem, Menu
+from wagtail.admin.menu import Menu, MenuItem, SubmenuMenuItem
 
 from .views import TelegramLinkedAccountView, telegram_instance_chooser_viewset
 

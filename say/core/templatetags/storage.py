@@ -4,6 +4,7 @@ from wagtail.models.sites import get_site_user_model
 
 from say.storage.models import StorageAccount
 
+
 SiteUser = get_site_user_model()
 
 

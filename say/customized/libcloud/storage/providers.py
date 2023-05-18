@@ -4,6 +4,7 @@ from libcloud.common.providers import get_driver as _get_provider_driver
 from libcloud.storage.providers import DRIVERS as OR_DRIVERS
 from libcloud.storage.types import OLD_CONSTANT_TO_NEW_MAPPING, Provider
 
+
 if TYPE_CHECKING:
     from libcloud.storage.base import StorageDriver
 

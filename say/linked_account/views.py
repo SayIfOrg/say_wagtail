@@ -7,8 +7,8 @@ from django.views.generic.base import View
 from wagtail.admin.ui.tables import Column, TitleColumn
 from wagtail.admin.views.generic.chooser import (
     BaseChooseView,
-    ChooseViewMixin,
     ChooseResultsViewMixin,
+    ChooseViewMixin,
     ChosenResponseMixin,
     ChosenViewMixin,
     CreationFormMixin,
@@ -17,8 +17,8 @@ from wagtail.admin.viewsets.chooser import ChooserViewSet
 from wagtail.admin.widgets import BaseChooser
 
 from say.linked_account.components import (
-    TelegramInstancePanel,
     TelegramInstanceCreatePanel,
+    TelegramInstancePanel,
 )
 
 

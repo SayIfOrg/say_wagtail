@@ -3,8 +3,9 @@ from django.shortcuts import redirect
 from django.utils.translation import gettext as _
 from django.views.generic import ListView
 from wagtail.admin import messages
-from wagtail.models.sites import get_site_user_model, Site
+from wagtail.models.sites import Site, get_site_user_model
 from wagtail.sites.utils import set_current_session_project
+
 
 SiteUser = get_site_user_model()
 

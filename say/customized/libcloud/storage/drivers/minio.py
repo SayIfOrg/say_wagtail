@@ -1,6 +1,6 @@
-from datetime import timedelta
 import io
 import os
+from datetime import timedelta
 
 from libcloud.storage.drivers.minio import MinIOStorageDriver as OrMinIOStorageDriver
 from libcloud.storage.types import ContainerDoesNotExistError

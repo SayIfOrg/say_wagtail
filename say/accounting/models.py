@@ -1,7 +1,5 @@
-from django.contrib.auth.models import (
-    AbstractUser,
-    UserManager as BaseUserManager,
-)
+from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import UserManager as BaseUserManager
 from django.db import models
 from wagtail.contrib.settings.models import BaseSiteSetting
 from wagtail.contrib.settings.registry import register_setting

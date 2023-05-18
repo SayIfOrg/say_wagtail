@@ -2,20 +2,21 @@ from contextlib import contextmanager
 
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from grapple.models import GraphQLString, GraphQLImage, GraphQLInt
 from wagtail.documents import models as wagtail_document_models
 from wagtail.images import models as wagtail_image_models
 from wagtail.images.models import (
     SourceImageIOError,
-    get_rendition_upload_to,
-    get_rendition_storage,
     WagtailImageField,
     WagtailImageFieldFile,
+    get_rendition_storage,
+    get_rendition_upload_to,
 )
 
+from grapple.models import GraphQLImage, GraphQLInt, GraphQLString
+
 from say.dynamic_storage.models import (
-    DynamicImageField,
     DynamicFileField,
+    DynamicImageField,
     DynamicImageFieldFile,
 )
 

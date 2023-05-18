@@ -1,15 +1,15 @@
-import grpc
 from django import forms
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from modelcluster.fields import ParentalKey
 from wagtail.admin.forms import WagtailAdminModelForm
 from wagtail.admin.panels import FieldPanel, FieldRowPanel, PageChooserPanel
 from wagtail.admin.widgets import SwitchInput
 from wagtail.models import Orderable
 from wagtail.snippets.models import register_snippet
 
-from say_protos import webpage_pb2_grpc, webpage_pb2
+import grpc
+from modelcluster.fields import ParentalKey
+from say_protos import webpage_pb2, webpage_pb2_grpc
 
 from say.linked_account.views import telegram_instance_chooser_viewset
 

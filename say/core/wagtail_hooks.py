@@ -1,5 +1,6 @@
-from django_vite.templatetags.django_vite import vite_asset, vite_hmr_client
 from wagtail import hooks
+
+from django_vite.templatetags.django_vite import vite_asset, vite_hmr_client
 
 
 VITE_SCRIPTS = "".join((vite_hmr_client(), vite_asset("static_src/main.ts")))

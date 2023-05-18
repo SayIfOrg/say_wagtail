@@ -3,7 +3,9 @@ Shared variables and code snippets for settings modules
 """
 
 import os
+
 from django.core.exceptions import ImproperlyConfigured
+
 import environ
 
 

@@ -1,17 +1,19 @@
-import pydantic
-from django.core.checks import register, Critical
-from django.core.exceptions import ValidationError, ImproperlyConfigured
+from django.core.checks import Critical, register
+from django.core.exceptions import ImproperlyConfigured, ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from wagtail.models import Site
 
+import pydantic
+
 from .storage import (
-    MinioAccountStorage,
-    Minio2AccountStorage,
-    get_storage_by_identity,
     AccountStorage,
+    Minio2AccountStorage,
+    MinioAccountStorage,
+    get_storage_by_identity,
 )
 from .utils import pydantic_validation_err_to_djs
+
 
 AVAILABLE_STORAGES = [
     MinioAccountStorage,
