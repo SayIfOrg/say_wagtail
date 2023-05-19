@@ -44,6 +44,7 @@ INSTALLED_APPS = clean_ellipsis(
         "django_vite",
         "grapple",
         "graphene_django",
+        "wagtail_headless_preview",
 
         "wagtail",
         "wagtail.admin",

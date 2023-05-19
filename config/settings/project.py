@@ -11,6 +11,9 @@ env = environ.Env(
 )
 
 
+WEBFACE_URL = env.url("WEBFACE_URL")
+
+
 # AVAILABLE_STORAGES = [
 #     "first_minio",
 # ]

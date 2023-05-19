@@ -1,6 +1,6 @@
 Django>=4.2,<4.3
 # wagtail(engAmirEng, multitenancy & build statics on pip install)
-git+https://github.com/engAmirEng/wagtail.git@360f9f59bda1f46f6cc93
+git+https://github.com/engAmirEng/wagtail.git@34ea7ec9aedb08550ce24b
 apache-libcloud>=3.6,<3.7
 django-cors-headers>=3.13,<3.14
 django-debug-toolbar>=4.0,<4.1
@@ -17,6 +17,7 @@ psycopg2-binary>=2.9,<2.10
 pydantic>=1.10,<1.11
 # say_protos
 git+https://github.com/SayIfOrg/say_protos.git@cd7f74268a6#subdirectory=packages/python
+wagtail-headless-preview>=0.5,<1
 # wagtail-grapple(engAmirEng modification)
 git+https://github.com/engAmirEng/wagtail-grapple.git@429bd6fc118138b
 whitenoise>=6.2,<7.0

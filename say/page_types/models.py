@@ -9,6 +9,7 @@ from wagtail.models import Page
 
 from grapple.models import GraphQLPage, GraphQLStreamfield
 from modelcluster.fields import ParentalManyToManyField
+from wagtail_headless_preview.models import HeadlessMixin
 
 
 class ListablePageMixin(models.Model):
@@ -27,7 +28,11 @@ class ListablePageMixin(models.Model):
     ]
 
 
-class SimplePage(Page, ListablePageMixin):
+class SimplePage(
+    HeadlessMixin,
+    Page,
+    ListablePageMixin,
+):
     parent_page_types = ["home.HomePage", "SimplePage"]
 
     body = StreamField(
@@ -52,7 +57,7 @@ class SimplePage(Page, ListablePageMixin):
     ]
 
 
-class ListingPage(Page):
+class ListingPage(HeadlessMixin, Page):
     parent_page_types = ["home.HomePage", "SimplePage"]
 
     body = StreamField(

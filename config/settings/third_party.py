@@ -40,8 +40,18 @@ WAGTAILADMIN_BASE_URL = "http://example.com"
 # engAmirEng/wagtail settings
 
 SITE_USER_MODEL = "accounting.SiteUser"
+SITE_ROOT_URL_GETTER = "say.accounting.utils.get_client_site_root_url"
 
 PATHS_NEED_SITE = ["^/admin/"]
+
+
+# wagtail_headless_preview #
+
+WAGTAIL_HEADLESS_PREVIEW = {
+    "CLIENT_URLS": {
+        "default": "{SITE_ROOT_URL}/preview/",
+    },
+}
 
 
 # django-cors-headers #
