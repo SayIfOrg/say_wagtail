@@ -1,4 +1,4 @@
-FROM python:3.10.8-slim-buster
+FROM nikolaik/python-nodejs:python3.10-nodejs18-slim
 
 # Set environment variables.
 # 1. Force Python stdout and stderr streams to be unbuffered.
@@ -8,27 +8,27 @@ ENV PYTHONUNBUFFERED=1 \
     PORT=8000
 
 # Install system packages required by Wagtail and Django.
-RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-recommends \
+RUN --mount=type=cache,target=var/cache/apt/archives apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-recommends \
     build-essential \
     libpq-dev \
-    libmariadbclient-dev \
+    # libmariadbclient-dev \
     libjpeg62-turbo-dev \
     zlib1g-dev \
     libwebp-dev\
     git
 
-# Cache potential requirements
-RUN --mount=type=cache,target=/root/.cache/pip
-
 # Install the application server.
 RUN pip install "gunicorn==20.1.0"
+RUN --mount=type=cache,target=/root/.npm pip install \
+    "git+https://github.com/engAmirEng/wagtail.git@02788dd5ca6dd4eea5a"
 
 # Use /app folder as a directory where the source code is stored.
 WORKDIR /project
 
 # Install the project requirements.
-COPY requirements.txt requirements_local.txt .
-RUN pip install -r requirements.txt
+COPY requirements.txt .
+# Cache potential requirements
+RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements.txt
 
 # Add user that will be used in the container.
 RUN useradd app
@@ -44,4 +44,4 @@ COPY --chown=app:app . .
 
 EXPOSE 8000
 
-CMD pip install -r requirements_local.txt && gunicorn config.wsgi:application
+CMD gunicorn config.wsgi:application
