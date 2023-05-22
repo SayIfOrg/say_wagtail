@@ -127,5 +127,6 @@ GRAPPLE = {
 # django-vite #
 
 DJANGO_VITE_ASSETS_PATH = os.path.join(BASE_DIR, "say", "static_dist")
+DJANGO_VITE_MANIFEST_PATH = os.path.join(DJANGO_VITE_ASSETS_PATH, "manifest.json")
 DJANGO_VITE_DEV_MODE = env.bool("DJANGO_VITE_DEV_MODE")
 DJANGO_VITE_DEV_SERVER_PORT = 8001
