@@ -30,6 +30,10 @@ COPY requirements.txt .
 # Cache potential requirements
 RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements.txt
 
+# Install the JS requirements.
+COPY package.json package-lock.json .
+RUN --mount=type=cache,target=/root/.npm npm ci
+
 # Add user that will be used in the container.
 RUN useradd app
 
@@ -39,9 +43,12 @@ RUN chown app:app /project
 # Copy the source code of the project into the container.
 COPY --chown=app:app . .
 
+# Build Vite
+RUN npm run build
+
 # Use user "app" to run the build commands below and the server itself.
 # USER app
 
 EXPOSE 8000
 
-CMD gunicorn config.wsgi:application
+CMD python manage.py collectstatic --noinput && gunicorn config.wsgi:application
