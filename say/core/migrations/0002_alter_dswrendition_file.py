@@ -5,7 +5,7 @@
 
 from django.db import migrations
 import wagtail.images.models
-import say.dynamic_storage.models
+import dynamic_storage.models
 
 
 def delete_all_renditions(apps, schema_editor):
@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="dswrendition",
             name="file",
-            field=say.dynamic_storage.models.DynamicImageField(
+            field=dynamic_storage.models.DynamicImageField(
                 height_field="height",
                 upload_to=wagtail.images.models.get_rendition_upload_to,
                 width_field="width",

@@ -1,8 +1,8 @@
 from django.dispatch import receiver
 
-from say.dynamic_storage.models import DynamicFieldFile
-from say.dynamic_storage.signals import pre_dynamic_file_save
-from say.dynamic_storage.storage import DynamicStorage
+from dynamic_storage.models import DynamicFieldFile
+from dynamic_storage.signals import pre_dynamic_file_save
+from dynamic_storage.storage import DynamicStorage
 
 from . import models
 

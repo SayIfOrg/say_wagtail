@@ -3,7 +3,7 @@
 from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
-import say.dynamic_storage.models
+import dynamic_storage.models
 import taggit.managers
 import wagtail.models.collections
 import wagtail.search.index
@@ -42,7 +42,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "file",
-                    say.dynamic_storage.models.DynamicFileField(
+                    dynamic_storage.models.DynamicFileField(
                         upload_to="documents", verbose_name="file"
                     ),
                 ),

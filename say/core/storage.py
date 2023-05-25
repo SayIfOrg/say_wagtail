@@ -1,12 +1,12 @@
 from django.utils.deconstruct import deconstructible
 
+from dynamic_storage.storage import DynamicStorageMixin
 from storages.backends.apache_libcloud import LibCloudFile as BaseLibCloudFile
 
 from say.customized.libcloud.storage.drivers.minio import MinIOStorageDriver
 from say.customized.storages.backends.apache_libcloud import (
     LibCloudStorage as BaseLibCloudStorage,
 )
-from say.dynamic_storage.storage import DynamicStorageMixin
 
 
 @deconstructible

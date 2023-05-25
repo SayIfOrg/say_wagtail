@@ -7,10 +7,10 @@ from django.core.exceptions import ImproperlyConfigured
 from django.core.files.storage import Storage
 from django.utils.deconstruct import deconstructible
 
+from dynamic_storage.storage import DynamicStorageMixin
 from pydantic import BaseModel, ValidationError, conint, constr
 
 from say.core.storage import MinioStorage
-from say.dynamic_storage.storage import DynamicStorageMixin
 
 
 class StorageDoesNotExists(Exception):

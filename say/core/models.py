@@ -12,13 +12,12 @@ from wagtail.images.models import (
     get_rendition_upload_to,
 )
 
-from grapple.models import GraphQLImage, GraphQLInt, GraphQLString
-
-from say.dynamic_storage.models import (
+from dynamic_storage.models import (
     DynamicFileField,
     DynamicImageField,
     DynamicImageFieldFile,
 )
+from grapple.models import GraphQLImage, GraphQLInt, GraphQLString
 
 
 class Monkey:

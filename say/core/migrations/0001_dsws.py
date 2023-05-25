@@ -3,7 +3,7 @@
 from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
-import say.dynamic_storage.models
+import dynamic_storage.models
 import taggit.managers
 import wagtail.images.models
 import wagtail.models.collections
@@ -60,7 +60,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "file",
-                    say.dynamic_storage.models.DynamicImageField(
+                    dynamic_storage.models.DynamicImageField(
                         height_field="height",
                         upload_to=wagtail.images.models.get_upload_to,
                         verbose_name="file",
