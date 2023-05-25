@@ -3,6 +3,7 @@ from wagtail.models.sites import get_site_user_model
 
 from .models import Project
 
+
 SiteUser = get_site_user_model()
 
 
