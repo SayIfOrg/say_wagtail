@@ -113,7 +113,19 @@ GRPCSERVER = {
 
 # graphene #
 
-GRAPHENE = {"SCHEMA": "grapple.schema.schema"}
+GRAPHENE = {
+    "SCHEMA": "grapple.schema.schema",
+    "MIDDLEWARE": [
+        "graphql_jwt.middleware.JSONWebTokenMiddleware",
+    ],
+}
+
+
+# django-graphql-jwt  #
+
+GRAPHQL_JWT = {
+    "JWT_LONG_RUNNING_REFRESH_TOKEN": True,
+}
 
 
 # wagtail-grapple #

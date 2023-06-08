@@ -29,6 +29,7 @@ CSRF_TRUSTED_ORIGINS = env.list(
 INSTALLED_APPS = clean_ellipsis(
     [
         # fmt: off
+        "say.graphqling",
         "say.home",
         "say.linked_account",
         "say.page_types",
@@ -43,6 +44,7 @@ INSTALLED_APPS = clean_ellipsis(
         "django_grpc",
         "django_vite",
         "grapple",
+        "graphql_jwt.refresh_token",
         "graphene_django",
         "wagtail_headless_preview",
 
@@ -138,6 +140,7 @@ CACHES = {
 
 
 AUTHENTICATION_BACKENDS = [
+    "graphql_jwt.backends.JSONWebTokenBackend",
     "wagtail.sites.backends.SiteAuthBackend",
     "django.contrib.auth.backends.ModelBackend",
 ]
