@@ -1,11 +1,12 @@
 from django.urls import path
 from wagtail import hooks
 
+from .views.linking import linking_telebot
 from .views.views import SiteChooserView, set_workon_site
 
 
 @hooks.register("register_admin_urls")
-def register_project_url():
+def extra_sites_urls():
     return [
         path(
             "sites/chooser-list",
@@ -16,5 +17,16 @@ def register_project_url():
             "sites/set-current-project/<int:site_id>",
             set_workon_site,
             name="set_workon_site",
+        ),
+    ]
+
+
+@hooks.register("register_admin_urls")
+def linking_urls():
+    return [
+        path(
+            "linking/telebot/<str:botel_username>/",
+            linking_telebot,
+            name="linking_telebot",
         ),
     ]
