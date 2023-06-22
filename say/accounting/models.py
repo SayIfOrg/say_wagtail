@@ -28,6 +28,19 @@ class UserManager(BaseUserManager):
     def get_queryset(self):
         return UserQuerySet(self.model, using=self._db)
 
+    def new_temp_user(self, preferred_username, first_name, last_name):
+        try:
+            _tmp = self.model.objects.get(username=preferred_username)
+        except self.model.DoesNotExist:
+            pass
+        else:
+            last_id = self.model.objects.order_by("pk").last().id
+            preferred_username = preferred_username + f"@{last_id}"
+        tmp_user = self.model.objects.create(
+            first_name=first_name, last_name=last_name, username=preferred_username
+        )
+        return tmp_user
+
 
 class User(SitePermissionsMonkeyPatchMixin, AbstractUser):
     IN_SITE_METHOD = "for_site"
