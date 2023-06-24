@@ -21,5 +21,5 @@ pydantic>=1.10,<1.11
 git+https://github.com/SayIfOrg/say_protos.git@cd7f74268a6#subdirectory=packages/python
 wagtail-headless-preview>=0.5,<1
 # wagtail-grapple(engAmirEng modification)
-git+https://github.com/engAmirEng/wagtail-grapple.git@3d24be7acc4ba259bb4
+git+https://github.com/engAmirEng/wagtail-grapple.git@2868b8e19caad8d2f6ce
 whitenoise>=6.2,<7.0
