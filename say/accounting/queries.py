@@ -3,6 +3,7 @@ from django.core.cache import cache
 
 import graphene
 from graphene_django import DjangoObjectType
+from graphene_django.filter import DjangoFilterConnectionField
 
 
 UserModel = get_user_model()
@@ -12,6 +13,17 @@ class UserType(DjangoObjectType):
     class Meta:
         model = UserModel
         fields = ("id", "first_name", "last_name", "username")
+        filter_fields = {
+            "id": ["in"],
+            "username": ["exact"],
+            "first_name": ["icontains"],
+            "last_name": ["icontains"],
+        }
+        interfaces = (graphene.relay.Node,)
+
+
+class Profile(graphene.ObjectType):
+    users = DjangoFilterConnectionField(UserType)
 
 
 class Linkings(graphene.ObjectType):

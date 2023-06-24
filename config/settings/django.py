@@ -41,6 +41,7 @@ INSTALLED_APPS = clean_ellipsis(
         "corsheaders",
         "debug_toolbar" if PLUGGABLE_FUNCS.DEBUG_TOOLBAR else ...,
         "django_browser_reload" if PLUGGABLE_FUNCS.BROWSER_RELOAD else ...,
+        "django_filters",
         "django_grpc",
         "django_vite",
         "grapple",
