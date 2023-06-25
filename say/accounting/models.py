@@ -1,11 +1,15 @@
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import UserManager as BaseUserManager
 from django.db import models
 from wagtail.contrib.settings.models import BaseSiteSetting
 from wagtail.contrib.settings.registry import register_setting
+from wagtail.images import get_image_model_string
 from wagtail.models import Site
 from wagtail.models.sites import AbstractSiteUser
 from wagtail.sites.utils import SitePermissionsMonkeyPatchMixin
+
+from grapple.models import DefaultField
 
 
 @register_setting
@@ -49,3 +53,22 @@ class User(SitePermissionsMonkeyPatchMixin, AbstractUser):
     def __init__(self, *args, **kwargs):
         super(User, self).__init__(*args, **kwargs)
         self.site_user: SiteUser
+
+
+class CustomUserProfile(models.Model):
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="user_customuserprofile",
+    )
+    avatar = models.ForeignKey(
+        get_image_model_string(),
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
+
+    graphql_fields = [
+        DefaultField("avatar"),
+    ]

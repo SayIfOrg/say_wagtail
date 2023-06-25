@@ -4,12 +4,19 @@ from django.core.cache import cache
 import graphene
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
+from grapple.types.images import get_image_type
 
 
 UserModel = get_user_model()
 
 
+class ProfileType(graphene.ObjectType):
+    avatar = graphene.Field(lambda: get_image_type())
+
+
 class UserType(DjangoObjectType):
+    profile = graphene.Field(ProfileType)
+
     class Meta:
         model = UserModel
         fields = ("id", "first_name", "last_name", "username")
@@ -20,6 +27,9 @@ class UserType(DjangoObjectType):
             "last_name": ["icontains"],
         }
         interfaces = (graphene.relay.Node,)
+
+    def resolve_profile(self, info, **kwargs):
+        return getattr(self, "user_customuserprofile", None)
 
 
 class Profile(graphene.ObjectType):
