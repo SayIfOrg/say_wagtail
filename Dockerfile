@@ -18,7 +18,7 @@ RUN --mount=type=cache,target=var/cache/apt/archives apt-get update --yes --quie
     git
 
 # Install the application server.
-RUN pip install "gunicorn==20.1.0"
+RUN pip install "gunicorn[gevent]>=20.1.0,<20.2"
 RUN --mount=type=cache,target=/root/.npm pip install \
     "git+https://github.com/engAmirEng/wagtail.git@02788dd5ca6dd4eea5a"
 
@@ -51,4 +51,4 @@ RUN npm run build
 
 EXPOSE 8000
 
-CMD python manage.py collectstatic --noinput && gunicorn config.wsgi:application
+CMD python manage.py collectstatic --noinput && gunicorn --config config/gunicorn.config.py config.wsgi:application

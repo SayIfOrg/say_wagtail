@@ -130,6 +130,7 @@ DATABASES = {
     # default
     "default": env.db_url("DATABASE_URL")
 }
+DATABASES["default"]["ENGINE"] = "django_db_geventpool.backends.postgresql_psycopg2"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 

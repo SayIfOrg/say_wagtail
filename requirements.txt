@@ -3,6 +3,7 @@ Django>=4.2,<4.3
 #git+https://github.com/engAmirEng/wagtail.git@f425a28667ba77a29ac2
 apache-libcloud>=3.6,<3.7
 django-cors-headers>=3.13,<3.14
+django-db-geventpool>=4.0.1,<5
 django-debug-toolbar>=4.0,<4.1
 django-dynamic-storage==0.1.1
 django-environ>=0.9,<1.0
@@ -12,6 +13,7 @@ django-htmx>=1.12,<1.13
 # django-storages
 git+https://github.com/jschneier/django-storages.git@72638483b17459577f17e151bb8a
 django-vite>=2.0.2,<2.1
+gevent>=22.10.2,<22.11
 grpcio>=1.50,<1.51
 grpcio-tools>=1.50,<1.51
 minio>=7.1,<7.2
