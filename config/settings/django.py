@@ -80,9 +80,11 @@ INSTALLED_APPS = clean_ellipsis(
 
 MIDDLEWARE = clean_ellipsis(
     [
-        "debug_toolbar.middleware.DebugToolbarMiddleware"
-        if PLUGGABLE_FUNCS.DEBUG_TOOLBAR
-        else ...,
+        (
+            "debug_toolbar.middleware.DebugToolbarMiddleware"
+            if PLUGGABLE_FUNCS.DEBUG_TOOLBAR
+            else ...
+        ),
         "django.contrib.sessions.middleware.SessionMiddleware",
         "corsheaders.middleware.CorsMiddleware",
         "django.middleware.common.CommonMiddleware",
@@ -94,9 +96,11 @@ MIDDLEWARE = clean_ellipsis(
         # "wagtail.contrib.redirects.middleware.RedirectMiddleware",
         "wagtail.sites.middleware.SiteUserMiddleware",
         "django_htmx.middleware.HtmxMiddleware",
-        "django_browser_reload.middleware.BrowserReloadMiddleware"
-        if PLUGGABLE_FUNCS.BROWSER_RELOAD
-        else ...,
+        (
+            "django_browser_reload.middleware.BrowserReloadMiddleware"
+            if PLUGGABLE_FUNCS.BROWSER_RELOAD
+            else ...
+        ),
     ]
 )
 
