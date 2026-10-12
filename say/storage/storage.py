@@ -66,12 +66,10 @@ class AccountStorageMixin(DynamicStorageMixin):
 
     @classmethod
     @abstractmethod
-    def title(cls) -> str:
-        ...
+    def title(cls) -> str: ...
 
 
-class AccountStorage(AccountStorageMixin, Storage):
-    ...
+class AccountStorage(AccountStorageMixin, Storage): ...
 
 
 @deconstructible
